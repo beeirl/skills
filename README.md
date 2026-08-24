@@ -4,11 +4,12 @@ Working set of agent skills used across local engineering agents. Each skill is 
 
 This repository is a public snapshot of the live tree at `~/.agents/skills` (also linked from `~/.claude/skills`). `lee-engineering` is the default router for software work. It loads the other skills only when they apply.
 
-Most skills here come from these original repositories. Use those repos for the upstream copies:
+Most skills here come from these sources. Use the linked repositories for upstream copies where they exist:
 
 - [mattpocock/skills](https://github.com/mattpocock/skills) — Skills For Real Engineers. Matt Pocock. MIT.
 - [RayFernando1337/rayfernando-skills](https://github.com/RayFernando1337/rayfernando-skills) — waves, QA, iOS bootstrap, and SwiftUI animation matching. Ray Fernando. Apache License 2.0.
 - Robert C. Martin, *Clean Code* (2008) and *Clean Architecture* (2017). Architecture notes: [guilhermebkel/gbkel-notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md). Agent packaging: [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills).
+- Lauren Tan's Dune method: capability folders, public module contracts, one data owner, and mechanical boundaries. Supporting principles: [pstack](https://github.com/cursor/plugins/tree/main/pstack/skills). Workshop chapter: [Implementing Strict CI Constraints and the Dune Architecture](https://maven.com/p/e23d9c/how-cursor-turned-ai-agents-into-better-engineers#t=2460).
 
 The catalog below links each copied skill to its folder in those repos. Original skills written for this collection are marked Original. Full notices are in [NOTICE.md](NOTICE.md).
 
@@ -61,7 +62,7 @@ Skip directories that are not skills. `LICENSE`, `NOTICE.md`, `README.md`, `.git
 | [typescript-best-practices](typescript-best-practices/) | TypeScript and TSX conventions used when reading or editing `.ts` / `.tsx` files. | Original |
 | [clean-code](clean-code/) | Enforce Clean Code on every source change: names, small functions, comments, errors, tests. | Robert C. Martin, *Clean Code* (2008) |
 | [clean-architecture](clean-architecture/) | Enforce the Dependency Rule when adding a file, import, module, or vendor. | Robert C. Martin, *Clean Architecture* (2017) · [gbkel notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md) |
-| [scaffolding](scaffolding/) | Enforce Dune-style capability folders, public module contracts, one data owner, and mechanical boundaries when creating an app or module. | Original (Lauren Tan's Dune method; pstack principles; Matilda OS as the worked example) |
+| [scaffolding](scaffolding/) | Enforce Dune-style capability folders, public module contracts, one data owner, and mechanical boundaries when creating an app or module. | Original · [Lauren Tan, Dune](https://maven.com/p/e23d9c/how-cursor-turned-ai-agents-into-better-engineers#t=2460) · [pstack](https://github.com/cursor/plugins/tree/main/pstack/skills) |
 | [tdd](tdd/) | Test-driven development. Red, green, refactor, including integration tests. | [mattpocock/skills](https://github.com/mattpocock/skills) · [tdd](https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd) |
 | [diagnosing-bugs](diagnosing-bugs/) | Diagnosis loop for hard bugs and performance regressions. | [mattpocock/skills](https://github.com/mattpocock/skills) · [diagnosing-bugs](https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnosing-bugs) |
 | [bootstrap-ios](bootstrap-ios/) | Bootstrap agents for Apple platforms: Swift, SwiftUI, Xcode, Simulator, App Intents. | [RayFernando1337/rayfernando-skills](https://github.com/RayFernando1337/rayfernando-skills) · [bootstrap-ios](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/bootstrap-ios/skills/bootstrap-ios) |
@@ -116,6 +117,17 @@ The GitHub repo [Gatjuat-Wicteat-Riek/clean-code-book](https://github.com/Gatjua
 
 Agent packaging also draws on [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills). These folders are not a reprint of either book.
 
+### Lauren Tan — Dune method and pstack
+
+[`scaffolding`](scaffolding/) packages Lauren Tan's Dune method. Dune is an in-house, agent-friendly React framework. There is no public Dune package. This collection does not contain Dune source.
+
+- [How Cursor Turned AI Agents Into Better Engineers](https://maven.com/p/e23d9c/how-cursor-turned-ai-agents-into-better-engineers#t=2460) — Maven workshop, 12 August 2026, chapter "Implementing Strict CI Constraints and the Dune Architecture" at 00:41:00.
+- [Lauren Tan's speaking history](https://www.no.lol/speaking/) — first-party background.
+- [pstack public principle skills](https://github.com/cursor/plugins/tree/main/pstack/skills) — model the domain, boundary discipline, minimise reader load, type-system discipline, idempotent operations.
+- Matilda OS `docs/audit/typescript-refactor-plan.md` §8 is the worked application of that method (capability folders, public module contracts, one data owner, mechanical dependency rules). Matilda product source is not copied here.
+
+Sources recorded in [`scaffolding/SOURCE.md`](scaffolding/SOURCE.md). Full notices are in [NOTICE.md](NOTICE.md).
+
 ### Original to this collection
 
 `lee-engineering`, `architect`, `arena`, `blast-radius`, `github-delivery`, `interrogate`, `scaffolding`, and `typescript-best-practices`. No earlier public skill matching these files was found.
@@ -128,7 +140,7 @@ Agent packaging also draws on [btseee/clean-code-skills](https://github.com/btse
 
 Original to this collection.
 
-Default entry point for planning, design, implementation, refactoring, debugging, review, and documentation. It reads the repository's own rules first, prefers TypeScript for new code when no language is already chosen, and loads only the specialist skills that help the current task.
+Default entry point for planning, design, implementation, refactoring, debugging, review, and documentation. It reads the repository's own rules first, prefers TypeScript for new code when no language is already chosen, and loads only the specialist skills that help the current task. Creating an app, module, package, workspace, or folder tree loads `scaffolding`. Adding a dependency, layer, or import that crosses a boundary loads `clean-architecture`. Writing or reviewing source loads `clean-code`.
 
 For non-trivial work it follows the local multi-model contract in `lee-engineering/references/model-routing.md`: coordinator, supervisor, specialist, worker, writer lease, route admission, receipts, and independent review. Cloud coding agents are out of scope. Skill activation never grants permission to push, open a pull request, deploy, or mutate unrelated external state.
 
@@ -142,9 +154,24 @@ Use for non-trivial or high-risk software changes. Ground the design in callers,
 
 ### scaffolding
 
-Original to this collection. Enforces Lauren Tan's Dune **method** (capability folders, public module contracts, one data owner, mechanical CI). Dune itself is an in-house framework with no public package. Supporting principles: [pstack](https://github.com/cursor/plugins/tree/main/pstack/skills). Worked example: Matilda OS `docs/audit/typescript-refactor-plan.md` §8.
+Original to this collection. Enforces Lauren Tan's Dune **method**, not a Dune install. Dune is in-house and has no public package.
 
-Use when creating an app, module, package, workspace, monorepo, or folder tree, or when deciding where a new capability lives. Layout: [`scaffolding/references/layout.md`](scaffolding/references/layout.md). Checker: [`scaffolding/scripts/check_capability_folders.py`](scaffolding/scripts/check_capability_folders.py).
+Use when creating an app, module, package, workspace, monorepo, or folder tree, or when deciding where a new capability lives. A model should load this skill for those tasks without being asked by name.
+
+It makes the safe path the default:
+
+- **Capability folders.** Domain knowledge lives in `modules/<noun>/`. One noun, one body of knowledge. Apps live in `apps/<name>/` as composition roots. Tooling stays in `tooling/`.
+- **Public module contract.** Callers import the package root only. `package.json` `exports` expose `"."`. The public file is `src/index.ts` or `public.ts`.
+- **One data owner.** One module writes each durable kind. Other modules call a public command or consume a versioned event. They do not query another module's tables.
+- **Thin apps.** Route handlers, CLIs, and workers authenticate, parse, invoke a module, and render. They do not own domain rules, SQL, or provider SDKs.
+- **Mechanical boundaries.** Forbidden imports fail CI. If the repo has an architecture check, run it. Otherwise run [`scaffolding/scripts/check_capability_folders.py`](scaffolding/scripts/check_capability_folders.py).
+- **Slice, not inventory.** Scaffold only the modules the current vertical slice uses. Empty packages and unused layer folders fail.
+
+Repository layout wins where it is already declared. The skill does not rewrite a healthy non-modular tree.
+
+Pair with `architect` for a new shape, `clean-architecture` for the Dependency Rule on imports, and `codebase-design` for the module's interface.
+
+Layout and ownership questions: [`scaffolding/references/layout.md`](scaffolding/references/layout.md). Sources: [`scaffolding/SOURCE.md`](scaffolding/SOURCE.md). Supporting principles: [pstack](https://github.com/cursor/plugins/tree/main/pstack/skills). Worked example: Matilda OS `docs/audit/typescript-refactor-plan.md` §8.
 
 ### codebase-design
 
