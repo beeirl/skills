@@ -8,7 +8,7 @@ Most skills here come from these sources. Use the linked repositories for upstre
 
 - [mattpocock/skills](https://github.com/mattpocock/skills) — Skills For Real Engineers. Matt Pocock. MIT.
 - [RayFernando1337/rayfernando-skills](https://github.com/RayFernando1337/rayfernando-skills) — waves, QA, iOS bootstrap, and SwiftUI animation matching. Ray Fernando. Apache License 2.0.
-- Robert C. Martin, *Clean Code* (2008) and *Clean Architecture* (2017). Architecture notes: [guilhermebkel/gbkel-notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md). Agent packaging: [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills).
+- Robert C. Martin, *Clean Code* (2008) and *Clean Architecture* (2017).
 - Lauren Tan's Dune method: capability folders, public module contracts, one data owner, and mechanical boundaries. Supporting principles: [pstack](https://github.com/cursor/plugins/tree/main/pstack/skills). Workshop chapter: [Implementing Strict CI Constraints and the Dune Architecture](https://maven.com/p/e23d9c/how-cursor-turned-ai-agents-into-better-engineers#t=2460).
 
 The catalog below links each copied skill to its folder in those repos. Original skills written for this collection are marked Original. Full notices are in [NOTICE.md](NOTICE.md).
@@ -61,7 +61,7 @@ Skip directories that are not skills. `LICENSE`, `NOTICE.md`, `README.md`, `.git
 | [grill-with-docs](grill-with-docs/) | Same interview, and it writes ADRs and glossary entries as you go. | [mattpocock/skills](https://github.com/mattpocock/skills) · [grill-with-docs](https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs) |
 | [typescript-best-practices](typescript-best-practices/) | TypeScript and TSX conventions used when reading or editing `.ts` / `.tsx` files. | Original |
 | [clean-code](clean-code/) | Enforce Clean Code on every source change: names, small functions, comments, errors, tests. | Robert C. Martin, *Clean Code* (2008) |
-| [clean-architecture](clean-architecture/) | Enforce the Dependency Rule when adding a file, import, module, or vendor. | Robert C. Martin, *Clean Architecture* (2017) · [gbkel notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md) |
+| [clean-architecture](clean-architecture/) | Enforce the Dependency Rule when adding a file, import, module, or vendor. | Robert C. Martin, *Clean Architecture* (2017) |
 | [scaffolding](scaffolding/) | Enforce Dune-style capability folders, public module contracts, one data owner, and mechanical boundaries when creating an app or module. | Original · [Lauren Tan, Dune](https://maven.com/p/e23d9c/how-cursor-turned-ai-agents-into-better-engineers#t=2460) · [pstack](https://github.com/cursor/plugins/tree/main/pstack/skills) |
 | [tdd](tdd/) | Test-driven development. Red, green, refactor, including integration tests. | [mattpocock/skills](https://github.com/mattpocock/skills) · [tdd](https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd) |
 | [diagnosing-bugs](diagnosing-bugs/) | Diagnosis loop for hard bugs and performance regressions. | [mattpocock/skills](https://github.com/mattpocock/skills) · [diagnosing-bugs](https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnosing-bugs) |
@@ -111,11 +111,9 @@ Copied here: `bootstrap-ios`, `running-bug-review-board`, `swiftui-animation-mat
 ### Robert C. Martin — *Clean Code* and *Clean Architecture*
 
 - *Clean Code: A Handbook of Agile Software Craftsmanship* (Prentice Hall, 2008) → [`clean-code`](clean-code/).
-- *Clean Architecture: A Craftsman's Guide to Software Structure and Design* (Prentice Hall, 2017) → [`clean-architecture`](clean-architecture/). Reader notes: [guilhermebkel/gbkel-notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md).
+- *Clean Architecture: A Craftsman's Guide to Software Structure and Design* (Prentice Hall, 2017) → [`clean-architecture`](clean-architecture/).
 
-The GitHub repo [Gatjuat-Wicteat-Riek/clean-code-book](https://github.com/Gatjuat-Wicteat-Riek/clean-code-book) is a PDFDrive scan of the copyrighted *Clean Code* book. It was not copied into this collection.
-
-Agent packaging also draws on [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills). These folders are not a reprint of either book.
+These folders are not a reprint of either book.
 
 ### Lauren Tan — Dune method and pstack
 
