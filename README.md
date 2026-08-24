@@ -30,48 +30,78 @@ mkdir -p ~/.agents/skills
 for skill in skills-collection/*/; do
   name=$(basename "$skill")
   case "$name" in
-    .git) continue ;;
+    .git|licenses) continue ;;
   esac
   cp -R "$skill" ~/.agents/skills/
 done
 ```
 
-Skip directories that are not skills. `LICENSE`, `README.md`, and `.gitignore` are not skills.
+Skip directories that are not skills. `LICENSE`, `NOTICE.md`, `README.md`, `.gitignore`, and `licenses/` are not skills.
 
 ## Catalog
 
-| Skill | Role |
-| --- | --- |
-| [lee-engineering](lee-engineering/) | Router for software work. Selects specialist skills, local multi-model routing, verification, and GitHub delivery. |
-| [architect](architect/) | Architecture-first design for changes that cross modules, contracts, or domain concepts. |
-| [codebase-design](codebase-design/) | Vocabulary and method for deep modules, seams, and testable interfaces. |
-| [improve-codebase-architecture](improve-codebase-architecture/) | Scan for deepening opportunities, present an HTML report, then grill the chosen one. |
-| [domain-modeling](domain-modeling/) | Sharpen domain language. Write or edit `CONTEXT.md` and architecture decision records. |
-| [prototype](prototype/) | Throwaway prototype to test a state model, logic, or UI before committing to it. |
-| [grilling](grilling/) | Relentless interview that stress-tests a plan, decision, or idea. |
-| [grill-with-docs](grill-with-docs/) | Same interview, and it writes ADRs and glossary entries as you go. |
-| [typescript-best-practices](typescript-best-practices/) | TypeScript and TSX conventions used when reading or editing `.ts` / `.tsx` files. |
-| [tdd](tdd/) | Test-driven development. Red, green, refactor, including integration tests. |
-| [diagnosing-bugs](diagnosing-bugs/) | Diagnosis loop for hard bugs and performance regressions. |
-| [bootstrap-ios](bootstrap-ios/) | Bootstrap agents for Apple platforms: Swift, SwiftUI, Xcode, Simulator, App Intents. |
-| [swiftui-animation-match](swiftui-animation-match/) | Match a UI interaction to proven SwiftUI animation patterns. |
-| [code-review](code-review/) | Two-axis review of a diff: standards versus the originating spec. |
-| [blast-radius](blast-radius/) | Change-impact and completion audit before declaring wide or risky work done. |
-| [interrogate](interrogate/) | Independent local multi-model review for contested, security-sensitive, or merge-critical work. |
-| [running-bug-review-board](running-bug-review-board/) | Real-user QA, bug filing, phase sign-off, and an HTML dashboard. |
-| [technical-writing](technical-writing/) | Diátaxis, Google developer style, STE, and Global English for docs and PR text. |
-| [writing-for-agents](writing-for-agents/) | How to write skills, `AGENTS.md`, and other documents that agents consume. |
-| [github-delivery](github-delivery/) | GitHub-only branches, issues, pull requests, checks, and merges. No Graphite. |
-| [resolving-merge-conflicts](resolving-merge-conflicts/) | Resolve an in-progress git merge or rebase conflict. |
-| [to-tickets](to-tickets/) | Break a plan into tracer-bullet tickets with blocking edges. |
-| [handoff](handoff/) | Compact the current conversation into a handoff for the next agent. |
-| [arena](arena/) | Isolated competing candidates, judged against shared criteria. |
-| [waves-codex](waves-codex/) | Bounded wave orchestration for Codex: workers, aggregate, verify, extend. |
-| [research](research/) | Investigate a question against primary sources and write findings into the repo. |
+| Skill | Role | Source |
+| --- | --- | --- |
+| [lee-engineering](lee-engineering/) | Router for software work. Selects specialist skills, local multi-model routing, verification, and GitHub delivery. | Original |
+| [architect](architect/) | Architecture-first design for changes that cross modules, contracts, or domain concepts. | Original |
+| [codebase-design](codebase-design/) | Vocabulary and method for deep modules, seams, and testable interfaces. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/codebase-design) |
+| [improve-codebase-architecture](improve-codebase-architecture/) | Scan for deepening opportunities, present an HTML report, then grill the chosen one. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture) |
+| [domain-modeling](domain-modeling/) | Sharpen domain language. Write or edit `CONTEXT.md` and architecture decision records. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling) |
+| [prototype](prototype/) | Throwaway prototype to test a state model, logic, or UI before committing to it. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/prototype) |
+| [grilling](grilling/) | Relentless interview that stress-tests a plan, decision, or idea. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling) |
+| [grill-with-docs](grill-with-docs/) | Same interview, and it writes ADRs and glossary entries as you go. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs) |
+| [typescript-best-practices](typescript-best-practices/) | TypeScript and TSX conventions used when reading or editing `.ts` / `.tsx` files. | Original |
+| [tdd](tdd/) | Test-driven development. Red, green, refactor, including integration tests. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd) |
+| [diagnosing-bugs](diagnosing-bugs/) | Diagnosis loop for hard bugs and performance regressions. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnosing-bugs) |
+| [bootstrap-ios](bootstrap-ios/) | Bootstrap agents for Apple platforms: Swift, SwiftUI, Xcode, Simulator, App Intents. | [Ray Fernando](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/bootstrap-ios/skills/bootstrap-ios) |
+| [swiftui-animation-match](swiftui-animation-match/) | Match a UI interaction to proven SwiftUI animation patterns. | [Ray Fernando](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/swiftui-animation-match/skills/swiftui-animation-match) |
+| [code-review](code-review/) | Two-axis review of a diff: standards versus the originating spec. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/code-review) (adapted) |
+| [blast-radius](blast-radius/) | Change-impact and completion audit before declaring wide or risky work done. | Original |
+| [interrogate](interrogate/) | Independent local multi-model review for contested, security-sensitive, or merge-critical work. | Original |
+| [running-bug-review-board](running-bug-review-board/) | Real-user QA, bug filing, phase sign-off, and an HTML dashboard. | [Ray Fernando](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/running-bug-review-board/skills/running-bug-review-board) |
+| [technical-writing](technical-writing/) | Diátaxis, Google developer style, STE, and Global English for docs and PR text. | Original (cites public style guides) |
+| [writing-for-agents](writing-for-agents/) | How to write skills, `AGENTS.md`, and other documents that agents consume. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/productivity/writing-for-agents) |
+| [github-delivery](github-delivery/) | GitHub-only branches, issues, pull requests, checks, and merges. No Graphite. | Original |
+| [resolving-merge-conflicts](resolving-merge-conflicts/) | Resolve an in-progress git merge or rebase conflict. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/resolving-merge-conflicts) |
+| [to-tickets](to-tickets/) | Break a plan into tracer-bullet tickets with blocking edges. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/to-tickets) (adapted) |
+| [handoff](handoff/) | Compact the current conversation into a handoff for the next agent. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) |
+| [arena](arena/) | Isolated competing candidates, judged against shared criteria. | Original |
+| [waves-codex](waves-codex/) | Bounded wave orchestration for Codex: workers, aggregate, verify, extend. | [Ray Fernando](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/waves-codex/skills/waves-codex) |
+| [research](research/) | Investigate a question against primary sources and write findings into the repo. | [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/research) |
+
+## Sources
+
+Most skills in this tree come from two public collections. A smaller set was written for this working setup. Full notices are in [NOTICE.md](NOTICE.md).
+
+### [Matt Pocock — Skills For Real Engineers](https://github.com/mattpocock/skills)
+
+MIT. Copyright (c) 2026 Matt Pocock.
+
+`codebase-design`, `code-review`, `diagnosing-bugs`, `domain-modeling`, `grill-with-docs`, `grilling`, `handoff`, `improve-codebase-architecture`, `prototype`, `research`, `resolving-merge-conflicts`, `tdd`, `to-tickets`, and `writing-for-agents`.
+
+`code-review` and `to-tickets` keep Matt's method and drop the requirement to run his setup skill. They use the repository's own GitHub tracker instead.
+
+Docs for several of these skills also live on [aihero.dev](https://www.aihero.dev/posts).
+
+### [Ray Fernando — rayfernando-skills](https://github.com/RayFernando1337/rayfernando-skills)
+
+Apache License 2.0. Copyright 2026 Ray Fernando. License text: [licenses/APACHE-2.0.txt](licenses/APACHE-2.0.txt).
+
+`bootstrap-ios`, `running-bug-review-board`, `swiftui-animation-match`, and `waves-codex`.
+
+`waves-codex` also credits [Phillip Chaffee's public `deep-research` Cursor skill](https://github.com/PhillipChaffee/.cursor) for run-shape triage and dependency-aware dispatch. `swiftui-animation-match` catalogs [Shubham Kumar Singh's SwiftUI-Animations](https://github.com/Shubham0812/SwiftUI-Animations). `bootstrap-ios` routes to community packs listed in [bootstrap-ios/references/sources.md](bootstrap-ios/references/sources.md), including [Paul Hudson / Hacking with Swift](https://github.com/twostraws/swift-agent-skills), [Antoine van der Lee](https://github.com/AvdLee), [OpenAI plugins](https://github.com/openai/plugins), [Krzysztof Zablocki](https://merowing.info/posts/stop-getting-average-code-from-your-llm/), and [XcodeBuildMCP](https://github.com/getsentry/XcodeBuildMCP).
+
+### Original to this collection
+
+`lee-engineering`, `architect`, `arena`, `blast-radius`, `github-delivery`, `interrogate`, and `typescript-best-practices`. No earlier public skill matching these files was found.
+
+`technical-writing` is also original. Its rules cite [Diátaxis](https://diataxis.fr) (Daniele Procida), the [Google developer documentation style guide](https://developers.google.com/style), [ASD-STE100](https://asd-ste100.org), and John R. Kohl, *The Global English Style Guide*.
 
 ## Router
 
 ### lee-engineering
+
+Original to this collection.
 
 Default entry point for planning, design, implementation, refactoring, debugging, review, and documentation. It reads the repository's own rules first, prefers TypeScript for new code when no language is already chosen, and loads only the specialist skills that help the current task.
 
@@ -81,29 +111,43 @@ For non-trivial work it follows the local multi-model contract in `lee-engineeri
 
 ### architect
 
+Original to this collection.
+
 Use for non-trivial or high-risk software changes. Ground the design in callers, data structures, signatures, and repository evidence, produce genuine alternatives, then implement against the chosen shape.
 
 ### codebase-design
+
+From [Matt Pocock's `codebase-design`](https://github.com/mattpocock/skills/tree/main/skills/engineering/codebase-design).
 
 Shared vocabulary for deep modules: where a seam goes, how an interface should look, how to make a module testable and navigable by an agent.
 
 ### improve-codebase-architecture
 
+From [Matt Pocock's `improve-codebase-architecture`](https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture).
+
 Scan a codebase for deepening opportunities, render them as a visual HTML report, then grill through the one you pick.
 
 ### domain-modeling
+
+From [Matt Pocock's `domain-modeling`](https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling).
 
 Build and sharpen the project's domain model. Use when discussing terminology, writing `CONTEXT.md`, or recording an ADR. Includes `CONTEXT-FORMAT.md` and `ADR-FORMAT.md`.
 
 ### prototype
 
+From [Matt Pocock's `prototype`](https://github.com/mattpocock/skills/tree/main/skills/engineering/prototype).
+
 Build a disposable prototype to answer a design question. Use it to sanity-check a state model, a logic path, or a UI, not to ship the prototype.
 
 ### grilling
 
+From [Matt Pocock's `grilling`](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling). The user-invoked wrapper in his repo is [`grill-me`](https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me).
+
 Interview the user until the plan, decision, or idea is stress-tested. Triggered by "grill" phrasing and by under-specified product or architecture decisions.
 
 ### grill-with-docs
+
+From [Matt Pocock's `grill-with-docs`](https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs).
 
 Runs `grilling` and `domain-modeling` together so the interview also leaves ADRs and glossary entries.
 
@@ -111,27 +155,39 @@ Runs `grilling` and `domain-modeling` together so the interview also leaves ADRs
 
 ### typescript-best-practices
 
+Original to this collection. No earlier public skill matching this file was found.
+
 Conventions for TypeScript and TSX. Load whenever reading or editing `.ts` or `.tsx` files. Detailed patterns live in `references/patterns.md`.
 
 ### tdd
+
+From [Matt Pocock's `tdd`](https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd).
 
 Test-driven development. Use when building features or fixing bugs test-first, when the user mentions red-green-refactor, or when writing integration tests. Companion notes: `tests.md`, `mocking.md`.
 
 ### diagnosing-bugs
 
+From [Matt Pocock's `diagnosing-bugs`](https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnosing-bugs).
+
 Diagnosis loop for failures and performance regressions. Use when the user says "diagnose" or "debug this", or reports something broken, throwing, failing, or slow.
 
 ### bootstrap-ios
 
+From [Ray Fernando's `bootstrap-ios`](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/bootstrap-ios/skills/bootstrap-ios). It loads community packs listed in [sources.md](bootstrap-ios/references/sources.md).
+
 Bootstrap agents for iOS, iPadOS, macOS, Swift, SwiftUI, SwiftData / Core Data, Swift Testing, Xcode, Simulator, App Intents, and XcodeBuildMCP. Use before Apple-platform work, or when asked to load Ray's iOS skills.
 
 ### swiftui-animation-match
+
+From [Ray Fernando's `swiftui-animation-match`](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/swiftui-animation-match/skills/swiftui-animation-match). First catalog: [Shubham0812/SwiftUI-Animations](https://github.com/Shubham0812/SwiftUI-Animations).
 
 Match a UI/UX interaction to proven SwiftUI animation patterns from curated open-source catalogs. Prefers system-first restraint before custom motion. Covers loaders, likes, toggles, card decks, reveals, and shaders.
 
 ## Review and quality
 
 ### code-review
+
+From [Matt Pocock's `code-review`](https://github.com/mattpocock/skills/tree/main/skills/engineering/code-review). This copy uses the repository's GitHub tracker and does not require his setup skill.
 
 Review changes since a fixed point (commit, branch, tag, or merge-base) on two axes, in parallel:
 
@@ -140,21 +196,31 @@ Review changes since a fixed point (commit, branch, tag, or merge-base) on two a
 
 ### blast-radius
 
+Original to this collection.
+
 Change-impact and completion audit. Use before declaring wide, risky, cross-cutting, or merge-critical work complete. Inspects callers and contracts beyond the diff, identifies safety facts, exercises the real artifact, and reports what is cleared versus still risky.
 
 ### interrogate
+
+Original to this collection.
 
 Independent local multi-model review. Use when one reviewer is not enough: contested, security-sensitive, high-risk, or merge-critical plans and changes. Reviewers get the same intent and rubric. The lead aggregates consensus and disagreement without pretending that two runs of the same family are independent.
 
 ### running-bug-review-board
 
+From [Ray Fernando's `running-bug-review-board`](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/running-bug-review-board/skills/running-bug-review-board). iOS simulator companions are credited in [ios-simulator-playbook.md](running-bug-review-board/references/ios-simulator-playbook.md).
+
 Real-user QA for web or iOS/iPadOS apps. Runs manual test plans, UX bug hunts, build sign-off, bug filing, and triage. Produces P0/P1/P2 reports, a YES/NO phase verdict, tracker sync guidance, and an HTML dashboard. Interactive Bug Review Board triage stays in a separate session.
 
 ### technical-writing
 
+Original to this collection. Rules cite [Diátaxis](https://diataxis.fr), the [Google developer documentation style guide](https://developers.google.com/style), [ASD-STE100](https://asd-ste100.org), and Kohl's *The Global English Style Guide*.
+
 Layered writing standard for docs, RFCs, READMEs, PR descriptions, and commit messages: Diátaxis structure, Google developer style, STE instruction rules, and Global English syntax.
 
 ### writing-for-agents
+
+From [Matt Pocock's `writing-for-agents`](https://github.com/mattpocock/skills/tree/main/skills/productivity/writing-for-agents).
 
 How to write documents that agents consume: skills, `AGENTS.md`, `CLAUDE.md`, and context pointers. Companion: `SKILL-MECHANICS.md` for frontmatter, invocation, and router skills.
 
@@ -162,17 +228,25 @@ How to write documents that agents consume: skills, `AGENTS.md`, `CLAUDE.md`, an
 
 ### github-delivery
 
+Original to this collection.
+
 GitHub-only delivery for branches, worktrees, issues, pull requests, checks, reviews, and merges. Uses `git`, `gh`, GitHub Actions, and GitHub Projects. Graphite and `gt` are disabled.
 
 ### resolving-merge-conflicts
+
+From [Matt Pocock's `resolving-merge-conflicts`](https://github.com/mattpocock/skills/tree/main/skills/engineering/resolving-merge-conflicts).
 
 Resolve an in-progress git merge or rebase conflict. Preserve both intents where possible, run the project's checks, and finish the merge or rebase. Do not abort.
 
 ### to-tickets
 
+From [Matt Pocock's `to-tickets`](https://github.com/mattpocock/skills/tree/main/skills/engineering/to-tickets). This copy keeps the repository's own tracker authoritative.
+
 Break a plan, spec, or conversation into tracer-bullet tickets. Each ticket declares its blocking edges. Edges are text in one file per ticket locally, or native blocking links on a real tracker.
 
 ### handoff
+
+From [Matt Pocock's `handoff`](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff).
 
 Compact the current conversation into a handoff document so another agent can continue. Redacts secrets and personal data. Saves outside the workspace.
 
@@ -180,13 +254,19 @@ Compact the current conversation into a handoff document so another agent can co
 
 ### arena
 
+Original to this collection.
+
 Local multi-agent design or implementation competition. Use when several materially different solutions are plausible and selection quality matters. Creates isolated candidates, judges them against shared criteria, and lets the lead synthesize and verify the strongest result. No cloud agents.
 
 ### waves-codex
 
+From [Ray Fernando's `waves-codex`](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/waves-codex/skills/waves-codex). Run-shape triage and dependency-aware dispatch also credit [Phillip Chaffee's `deep-research` Cursor skill](https://github.com/PhillipChaffee/.cursor).
+
 WAVES: Workers, Aggregate, Verify, Extend. Wave-based orchestration for Codex. Decompose a large goal into independent slices, spawn a bounded parallel wave, collect evidence-backed handoffs, verify important claims, synthesize one deliverable, and start another wave only when warranted.
 
 ### research
+
+From [Matt Pocock's `research`](https://github.com/mattpocock/skills/tree/main/skills/engineering/research).
 
 Investigate a question against high-trust primary sources and write the findings as a Markdown file in the repository. Use for docs, API facts, or reading work that can run in a background agent.
 
@@ -235,4 +315,4 @@ An older public collection lives at [korallis/skills](https://github.com/koralli
 
 ## License
 
-MIT. See [LICENSE](LICENSE). Some skills were adapted from public skill libraries. Keep their provenance notes inside the skill files when those notes exist.
+Original files and the Matt Pocock copies are MIT. See [LICENSE](LICENSE). Ray Fernando skills stay Apache License 2.0. See [licenses/APACHE-2.0.txt](licenses/APACHE-2.0.txt). Authors, URLs, and which license applies to each skill are in [NOTICE.md](NOTICE.md).

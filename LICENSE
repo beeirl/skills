@@ -1,6 +1,18 @@
+This repository contains original skills and copies or adaptations of
+third-party skills. See NOTICE.md for authors, source URLs, and which
+license applies to each skill.
+
+Matt Pocock skills remain under the MIT License, Copyright (c) 2026
+Matt Pocock. Ray Fernando skills remain under the Apache License 2.0,
+Copyright 2026 Ray Fernando; the Apache text is in licenses/APACHE-2.0.txt.
+
+The MIT text below covers original files in this collection and the
+Matt Pocock copies.
+
 MIT License
 
 Copyright (c) 2026 Korallis
+Copyright (c) 2026 Matt Pocock
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
