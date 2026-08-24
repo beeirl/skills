@@ -5,12 +5,15 @@ license: MIT
 compatibility: Works with no tooling. Optional scripts in scripts/ need Python 3.8+ and read-only filesystem access; they write only to .clean/ and never use the network.
 metadata:
   version: "3.0.0"
-  source: "https://github.com/btseee/clean-code-skills"
+  source: "Robert C. Martin, Clean Code (Prentice Hall, 2008)"
 ---
 
-# Clean Code And Clean Architecture
+# Clean Code
 
-Source: [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills) v3.0.0. MIT. Copyright (c) 2026 Battseren Badral. Hooks live in `assets/hooks/`. For layering and the Dependency Rule, also load `clean-architecture`.
+Based on Robert C. Martin's *Clean Code: A Handbook of Agile Software Craftsmanship*
+(Prentice Hall, 2008). Chapter map: [`references/chapter-map.md`](references/chapter-map.md).
+This is not a reprint of the book. For layering and the Dependency Rule from Martin's later
+book *Clean Architecture* (2017), load `clean-architecture`.
 
 Clean code makes intent, behavior, boundaries, and failure modes easy for the next maintainer to
 understand and safely change. Clean architecture keeps the cost of a change proportional to its

@@ -14,13 +14,15 @@ records the sources that could be identified.
 - Some of those copies have local edits. code-review and to-tickets prefer the
   repository's own GitHub tracker and do not require Matt Pocock's setup skill.
 
-## Battseren Badral — clean-code-skills
+## Robert C. Martin — Clean Code and Clean Architecture
 
-- Repository: https://github.com/btseee/clean-code-skills
-- License: MIT. Copyright (c) 2026 Battseren Badral. See LICENSE.
-- Skills in this collection: clean-code, clean-architecture.
-- The original Claude Code hook is clean-code/assets/hooks/claude-settings.json.
-  The git pre-commit hook is clean-code/assets/hooks/pre-commit.
+- *Clean Code: A Handbook of Agile Software Craftsmanship* (Prentice Hall, 2008)
+  is the source of the `clean-code` skill. See clean-code/SOURCE.md.
+- *Clean Architecture: A Craftsman's Guide to Software Structure and Design*
+  (Prentice Hall, 2017) is the source of the `clean-architecture` skill.
+- Neither book is reprinted here. Agent packaging was adapted from
+  https://github.com/btseee/clean-code-skills (MIT, Copyright (c) 2026
+  Battseren Badral).
 
 ## Ray Fernando — rayfernando-skills
 
