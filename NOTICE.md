@@ -46,6 +46,22 @@ records the sources that could be identified.
 - Community iOS skills and tools listed in bootstrap-ios/references/sources.md
   and running-bug-review-board/references/ios-simulator-playbook.md.
 
+## Lauren Tan — Dune method, pstack principles
+
+The `scaffolding` skill is original packaging of a method, not a copy of a
+framework or a book:
+
+- Lauren Tan, Maven workshop (12 August 2026), chapter "Implementing Strict CI
+  Constraints and the Dune Architecture".
+  https://maven.com/p/e23d9c/how-cursor-turned-ai-agents-into-better-engineers#t=2460
+- Lauren Tan's public posts on Dune as an in-house agent-friendly React
+  framework (`poteto`). Dune is not a public package; this collection does not
+  contain Dune source.
+- pstack public principle skills:
+  https://github.com/cursor/plugins/tree/main/pstack/skills
+- Matilda OS `docs/audit/typescript-refactor-plan.md` §8 is the worked
+  application of that method. Matilda product source is not copied here.
+
 ## Writing sources cited by technical-writing
 
 The technical-writing skill is original to this collection. Its rules cite:

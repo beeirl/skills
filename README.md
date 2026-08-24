@@ -61,6 +61,7 @@ Skip directories that are not skills. `LICENSE`, `NOTICE.md`, `README.md`, `.git
 | [typescript-best-practices](typescript-best-practices/) | TypeScript and TSX conventions used when reading or editing `.ts` / `.tsx` files. | Original |
 | [clean-code](clean-code/) | Enforce Clean Code on every source change: names, small functions, comments, errors, tests. | Robert C. Martin, *Clean Code* (2008) |
 | [clean-architecture](clean-architecture/) | Enforce the Dependency Rule when adding a file, import, module, or vendor. | Robert C. Martin, *Clean Architecture* (2017) · [gbkel notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md) |
+| [scaffolding](scaffolding/) | Enforce Dune-style capability folders, public module contracts, one data owner, and mechanical boundaries when creating an app or module. | Original (Lauren Tan's Dune method; pstack principles; Matilda OS as the worked example) |
 | [tdd](tdd/) | Test-driven development. Red, green, refactor, including integration tests. | [mattpocock/skills](https://github.com/mattpocock/skills) · [tdd](https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd) |
 | [diagnosing-bugs](diagnosing-bugs/) | Diagnosis loop for hard bugs and performance regressions. | [mattpocock/skills](https://github.com/mattpocock/skills) · [diagnosing-bugs](https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnosing-bugs) |
 | [bootstrap-ios](bootstrap-ios/) | Bootstrap agents for Apple platforms: Swift, SwiftUI, Xcode, Simulator, App Intents. | [RayFernando1337/rayfernando-skills](https://github.com/RayFernando1337/rayfernando-skills) · [bootstrap-ios](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/bootstrap-ios/skills/bootstrap-ios) |
@@ -117,7 +118,7 @@ Agent packaging also draws on [btseee/clean-code-skills](https://github.com/btse
 
 ### Original to this collection
 
-`lee-engineering`, `architect`, `arena`, `blast-radius`, `github-delivery`, `interrogate`, and `typescript-best-practices`. No earlier public skill matching these files was found.
+`lee-engineering`, `architect`, `arena`, `blast-radius`, `github-delivery`, `interrogate`, `scaffolding`, and `typescript-best-practices`. No earlier public skill matching these files was found.
 
 `technical-writing` is also original. Its rules cite [Diátaxis](https://diataxis.fr) (Daniele Procida), the [Google developer documentation style guide](https://developers.google.com/style), [ASD-STE100](https://asd-ste100.org), and John R. Kohl, *The Global English Style Guide*.
 
@@ -138,6 +139,12 @@ For non-trivial work it follows the local multi-model contract in `lee-engineeri
 Original to this collection.
 
 Use for non-trivial or high-risk software changes. Ground the design in callers, data structures, signatures, and repository evidence, produce genuine alternatives, then implement against the chosen shape.
+
+### scaffolding
+
+Original to this collection. Enforces Lauren Tan's Dune **method** (capability folders, public module contracts, one data owner, mechanical CI). Dune itself is an in-house framework with no public package. Supporting principles: [pstack](https://github.com/cursor/plugins/tree/main/pstack/skills). Worked example: Matilda OS `docs/audit/typescript-refactor-plan.md` §8.
+
+Use when creating an app, module, package, workspace, monorepo, or folder tree, or when deciding where a new capability lives. Layout: [`scaffolding/references/layout.md`](scaffolding/references/layout.md). Checker: [`scaffolding/scripts/check_capability_folders.py`](scaffolding/scripts/check_capability_folders.py).
 
 ### codebase-design
 
