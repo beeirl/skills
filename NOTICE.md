@@ -22,7 +22,7 @@ records the sources that could be identified.
   (Prentice Hall, 2017) is the source of the `clean-architecture` skill.
 - Architecture reader notes:
   https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md
-  (Guilherme Klein). Distilled in clean-architecture/references/gbkel-notes.md.
+  (Guilherme Klein).
 - https://github.com/Gatjuat-Wicteat-Riek/clean-code-book was not used. It hosts
   an unauthorized PDF of the copyrighted *Clean Code* book.
 - Neither book is reprinted here. Agent packaging was also adapted from

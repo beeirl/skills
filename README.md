@@ -59,8 +59,8 @@ Skip directories that are not skills. `LICENSE`, `NOTICE.md`, `README.md`, `.git
 | [grilling](grilling/) | Relentless interview that stress-tests a plan, decision, or idea. | [mattpocock/skills](https://github.com/mattpocock/skills) · [grilling](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling) |
 | [grill-with-docs](grill-with-docs/) | Same interview, and it writes ADRs and glossary entries as you go. | [mattpocock/skills](https://github.com/mattpocock/skills) · [grill-with-docs](https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs) |
 | [typescript-best-practices](typescript-best-practices/) | TypeScript and TSX conventions used when reading or editing `.ts` / `.tsx` files. | Original |
-| [clean-code](clean-code/) | Language-agnostic clean-code contract from Martin's *Clean Code* (2008): names, functions, comments, tests, smells. | Robert C. Martin, *Clean Code* (2008) · [chapter map](clean-code/references/chapter-map.md) |
-| [clean-architecture](clean-architecture/) | Dependency Rule, layers, and module boundaries from Martin's *Clean Architecture* (2017). | [gbkel notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md) · [notes file](clean-architecture/references/gbkel-notes.md) |
+| [clean-code](clean-code/) | Enforce Clean Code on every source change: names, small functions, comments, errors, tests. | Robert C. Martin, *Clean Code* (2008) |
+| [clean-architecture](clean-architecture/) | Enforce the Dependency Rule when adding a file, import, module, or vendor. | Robert C. Martin, *Clean Architecture* (2017) · [gbkel notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md) |
 | [tdd](tdd/) | Test-driven development. Red, green, refactor, including integration tests. | [mattpocock/skills](https://github.com/mattpocock/skills) · [tdd](https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd) |
 | [diagnosing-bugs](diagnosing-bugs/) | Diagnosis loop for hard bugs and performance regressions. | [mattpocock/skills](https://github.com/mattpocock/skills) · [diagnosing-bugs](https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnosing-bugs) |
 | [bootstrap-ios](bootstrap-ios/) | Bootstrap agents for Apple platforms: Swift, SwiftUI, Xcode, Simulator, App Intents. | [RayFernando1337/rayfernando-skills](https://github.com/RayFernando1337/rayfernando-skills) · [bootstrap-ios](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/bootstrap-ios/skills/bootstrap-ios) |
@@ -108,8 +108,8 @@ Copied here: `bootstrap-ios`, `running-bug-review-board`, `swiftui-animation-mat
 
 ### Robert C. Martin — *Clean Code* and *Clean Architecture*
 
-- *Clean Code: A Handbook of Agile Software Craftsmanship* (Prentice Hall, 2008) → [`clean-code`](clean-code/). Chapter map: [`clean-code/references/chapter-map.md`](clean-code/references/chapter-map.md).
-- *Clean Architecture: A Craftsman's Guide to Software Structure and Design* (Prentice Hall, 2017) → [`clean-architecture`](clean-architecture/). Reader notes: [guilhermebkel/gbkel-notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md). Distilled file: [`clean-architecture/references/gbkel-notes.md`](clean-architecture/references/gbkel-notes.md).
+- *Clean Code: A Handbook of Agile Software Craftsmanship* (Prentice Hall, 2008) → [`clean-code`](clean-code/).
+- *Clean Architecture: A Craftsman's Guide to Software Structure and Design* (Prentice Hall, 2017) → [`clean-architecture`](clean-architecture/). Reader notes: [guilhermebkel/gbkel-notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md).
 
 The GitHub repo [Gatjuat-Wicteat-Riek/clean-code-book](https://github.com/Gatjuat-Wicteat-Riek/clean-code-book) is a PDFDrive scan of the copyrighted *Clean Code* book. It was not copied into this collection.
 
@@ -185,13 +185,11 @@ Conventions for TypeScript and TSX. Load whenever reading or editing `.ts` or `.
 
 ### clean-code
 
-Based on Robert C. Martin's *Clean Code* (Prentice Hall, 2008). Chapters 1–17 are indexed in [`clean-code/references/chapter-map.md`](clean-code/references/chapter-map.md). The GitHub PDF at [Gatjuat-Wicteat-Riek/clean-code-book](https://github.com/Gatjuat-Wicteat-Riek/clean-code-book) was not copied.
+Enforce Robert C. Martin's *Clean Code* (2008) on every source change. Model-invoked when writing, editing, reviewing, or refactoring any source file. Smell IDs: [`clean-code/references/smells.md`](clean-code/references/smells.md).
 
 ### clean-architecture
 
-Based on Robert C. Martin's *Clean Architecture* (Prentice Hall, 2017). Operating checks from [guilhermebkel's notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md) live in [`clean-architecture/references/gbkel-notes.md`](clean-architecture/references/gbkel-notes.md).
-
-Use when adding a dependency, creating or crossing a layer, or deciding where a file belongs across modules. The Dependency Rule: source dependencies point only inward.
+Enforce the Dependency Rule from *Clean Architecture* (2017) when adding a file, import, module, or vendor. Circles: [`clean-architecture/references/circles.md`](clean-architecture/references/circles.md).
 
 ### tdd
 
