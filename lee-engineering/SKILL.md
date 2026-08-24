@@ -44,6 +44,8 @@ Load only the skills that materially help the current task:
 - A settled plan that needs independently verifiable GitHub work units: `to-tickets`, while keeping
   the repository's existing tracker and source-of-work rules authoritative.
 - TypeScript or TSX implementation and review: `typescript-best-practices`.
+- Writing, placing, or reviewing code in any language: `clean-code`. Adding a
+  dependency, layer, or module boundary: `clean-architecture`.
 - New behavior or a defect fix: `tdd`; for an unknown failure, start with `diagnosing-bugs`.
 - Merge conflicts: `resolving-merge-conflicts`.
 - Large work with independent slices: `waves-codex`.

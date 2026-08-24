@@ -14,6 +14,14 @@ records the sources that could be identified.
 - Some of those copies have local edits. code-review and to-tickets prefer the
   repository's own GitHub tracker and do not require Matt Pocock's setup skill.
 
+## Battseren Badral — clean-code-skills
+
+- Repository: https://github.com/btseee/clean-code-skills
+- License: MIT. Copyright (c) 2026 Battseren Badral. See LICENSE.
+- Skills in this collection: clean-code, clean-architecture.
+- The original Claude Code hook is clean-code/assets/hooks/claude-settings.json.
+  The git pre-commit hook is clean-code/assets/hooks/pre-commit.
+
 ## Ray Fernando — rayfernando-skills
 
 - Repository: https://github.com/RayFernando1337/rayfernando-skills

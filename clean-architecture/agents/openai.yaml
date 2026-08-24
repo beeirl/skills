@@ -1,0 +1,3 @@
+interface:
+  display_name: "Clean Architecture"
+  short_description: "Dependency rule, layers, and module boundaries"

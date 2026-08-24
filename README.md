@@ -8,6 +8,7 @@ Most skills here come from these original repositories. Use those repos for the 
 
 - [mattpocock/skills](https://github.com/mattpocock/skills) — Skills For Real Engineers. Matt Pocock. MIT.
 - [RayFernando1337/rayfernando-skills](https://github.com/RayFernando1337/rayfernando-skills) — waves, QA, iOS bootstrap, and SwiftUI animation matching. Ray Fernando. Apache License 2.0.
+- [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills) — clean-code skill plus Claude Code and git hooks. Battseren Badral. MIT.
 
 The catalog below links each copied skill to its folder in those repos. Original skills written for this collection are marked Original. Full notices are in [NOTICE.md](NOTICE.md).
 
@@ -58,6 +59,8 @@ Skip directories that are not skills. `LICENSE`, `NOTICE.md`, `README.md`, `.git
 | [grilling](grilling/) | Relentless interview that stress-tests a plan, decision, or idea. | [mattpocock/skills](https://github.com/mattpocock/skills) · [grilling](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling) |
 | [grill-with-docs](grill-with-docs/) | Same interview, and it writes ADRs and glossary entries as you go. | [mattpocock/skills](https://github.com/mattpocock/skills) · [grill-with-docs](https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs) |
 | [typescript-best-practices](typescript-best-practices/) | TypeScript and TSX conventions used when reading or editing `.ts` / `.tsx` files. | Original |
+| [clean-code](clean-code/) | Language-agnostic clean-code contract: placement, one job per unit, surgical diffs, honest verification. Includes the original hooks. | [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills) · [clean-code](https://github.com/btseee/clean-code-skills/tree/main/skills/clean-code) |
+| [clean-architecture](clean-architecture/) | Dependency Rule, layers, and module boundaries. Load when adding a dependency or crossing a layer. | [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills) (architecture slice) |
 | [tdd](tdd/) | Test-driven development. Red, green, refactor, including integration tests. | [mattpocock/skills](https://github.com/mattpocock/skills) · [tdd](https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd) |
 | [diagnosing-bugs](diagnosing-bugs/) | Diagnosis loop for hard bugs and performance regressions. | [mattpocock/skills](https://github.com/mattpocock/skills) · [diagnosing-bugs](https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnosing-bugs) |
 | [bootstrap-ios](bootstrap-ios/) | Bootstrap agents for Apple platforms: Swift, SwiftUI, Xcode, Simulator, App Intents. | [RayFernando1337/rayfernando-skills](https://github.com/RayFernando1337/rayfernando-skills) · [bootstrap-ios](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/bootstrap-ios/skills/bootstrap-ios) |
@@ -102,6 +105,12 @@ Apache License 2.0. Copyright 2026 Ray Fernando. License text: [licenses/APACHE-
 Copied here: `bootstrap-ios`, `running-bug-review-board`, `swiftui-animation-match`, and `waves-codex`.
 
 `waves-codex` also credits [Phillip Chaffee's public `deep-research` Cursor skill](https://github.com/PhillipChaffee/.cursor) for run-shape triage and dependency-aware dispatch. `swiftui-animation-match` catalogs [Shubham Kumar Singh's SwiftUI-Animations](https://github.com/Shubham0812/SwiftUI-Animations). `bootstrap-ios` routes to community packs listed in [bootstrap-ios/references/sources.md](bootstrap-ios/references/sources.md), including [Paul Hudson / Hacking with Swift](https://github.com/twostraws/swift-agent-skills), [Antoine van der Lee](https://github.com/AvdLee), [OpenAI plugins](https://github.com/openai/plugins), [Krzysztof Zablocki](https://merowing.info/posts/stop-getting-average-code-from-your-llm/), and [XcodeBuildMCP](https://github.com/getsentry/XcodeBuildMCP).
+
+### [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills)
+
+Clean-code and clean-architecture discipline, plus hooks. MIT. Copyright (c) 2026 Battseren Badral.
+
+Copied here as `clean-code` (full skill, scripts, and hooks) and `clean-architecture` (architecture slice). The original Claude Code hook is `clean-code/assets/hooks/claude-settings.json`. The portable git hook is `clean-code/assets/hooks/pre-commit`. A Grok-compatible copy is `clean-code/assets/hooks/grok-hooks.json`.
 
 ### Original to this collection
 
@@ -170,6 +179,18 @@ Runs `grilling` and `domain-modeling` together so the interview also leaves ADRs
 Original to this collection. No earlier public skill matching this file was found.
 
 Conventions for TypeScript and TSX. Load whenever reading or editing `.ts` or `.tsx` files. Detailed patterns live in `references/patterns.md`.
+
+### clean-code
+
+From [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills) (`skills/clean-code/`). MIT.
+
+Language-agnostic operating contract for writing, placing, and reviewing code. Load for features, fixes, refactors, and reviews. Includes session, onboard, bootstrap, and audit workflows, plus the original Claude Code and git pre-commit hooks.
+
+### clean-architecture
+
+From the architecture half of [btseee/clean-code-skills](https://github.com/btseee/clean-code-skills). MIT.
+
+Use when adding a dependency, creating or crossing a layer, or deciding where a file belongs across modules. The Dependency Rule: source dependencies point only inward.
 
 ### tdd
 
