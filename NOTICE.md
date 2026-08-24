@@ -20,7 +20,12 @@ records the sources that could be identified.
   is the source of the `clean-code` skill. See clean-code/SOURCE.md.
 - *Clean Architecture: A Craftsman's Guide to Software Structure and Design*
   (Prentice Hall, 2017) is the source of the `clean-architecture` skill.
-- Neither book is reprinted here. Agent packaging was adapted from
+- Architecture reader notes:
+  https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md
+  (Guilherme Klein). Distilled in clean-architecture/references/gbkel-notes.md.
+- https://github.com/Gatjuat-Wicteat-Riek/clean-code-book was not used. It hosts
+  an unauthorized PDF of the copyrighted *Clean Code* book.
+- Neither book is reprinted here. Agent packaging was also adapted from
   https://github.com/btseee/clean-code-skills (MIT, Copyright (c) 2026
   Battseren Badral).
 

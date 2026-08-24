@@ -3,20 +3,24 @@ name: clean-architecture
 description: Use when adding a dependency, creating or crossing a layer or module boundary, deciding where a file belongs across layers, adopting a framework or database, starting a new project structure, or auditing architectural drift. Covers the Dependency Rule, policy versus detail, SOLID as dependency rules, component cohesion and coupling, Humble Object, and packaging.
 license: MIT
 metadata:
-  source: "https://github.com/btseee/clean-code-skills"
+  source: "Robert C. Martin, Clean Architecture (2017); https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md"
 ---
 
 # Clean Architecture
 
 Based on Robert C. Martin's *Clean Architecture: A Craftsman's Guide to Software Structure
-and Design* (Prentice Hall, 2017). That is a different book from *Clean Code* (2008).
-This is not a reprint. Code-level rules from *Clean Code* live in `clean-code`.
+and Design* (Prentice Hall, 2017). Reader notes used:
+[guilhermebkel/gbkel-notes](https://github.com/guilhermebkel/gbkel-notes/blob/main/books/clean-architecture-a-craftsmans-guide-to-software-structure-and-design.md).
+This is not a reprint of the book. Code-level rules from *Clean Code* (2008) live in `clean-code`.
 
 Architecture is the lines *between* units: which way dependencies cross, and what a change costs.
+The goal is to keep the human effort of each release low for the life of the system.
 
-Read [`references/architecture.md`](references/architecture.md) before adding a dependency, a
-layer, a framework, or a database. Use [`references/architecture-map.md`](references/architecture-map.md)
-when you know the question and need the governing rule.
+Read [`references/gbkel-notes.md`](references/gbkel-notes.md) for the notes-based operating
+checks. Read [`references/architecture.md`](references/architecture.md) before adding a
+dependency, a layer, a framework, or a database. Use
+[`references/architecture-map.md`](references/architecture-map.md) when you know the question
+and need the governing rule.
 
 ## Load project context
 
@@ -79,6 +83,17 @@ over discipline.
 | Whole-project or module-wide cleanup | [`references/project-refactor.md`](references/project-refactor.md) |
 | Ordinary feature or fix | `clean-code` surgical mode, then this skill for any new dependency |
 
+## Notes-based checks
+
+From the gbkel notes. Apply on every architecture change:
+
+- Wrap vendor libraries in an adapter. Do not import them into policy.
+- Keep similar use cases separate until they must always change together.
+- Entities and use cases take and return data they understand. No request objects, row
+  structures, or ORM types inward.
+- Names scream the domain. Frameworks are tools, not the shape of the tree.
+- `main` is a plugin. Prefer a separate `main` per configuration.
+
 ## Failure modes
 
 - Shortest-path wiring: a controller calling a repository and skipping the layer that owns
@@ -87,6 +102,7 @@ over discipline.
 - Framework as architecture: directories named after the stack, not the domain.
 - Eager deduplication across actor boundaries.
 - A process split (microservices) treated as an architectural boundary.
+- Coupling two use cases because they look the same today.
 
 ## Done
 

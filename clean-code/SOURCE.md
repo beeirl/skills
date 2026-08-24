@@ -1,16 +1,20 @@
 # Source
 
-These rules come from Robert C. Martin's book *Clean Code: A Handbook of Agile Software
-Craftsmanship* (Prentice Hall, 2008). The chapter map is in
-[`references/chapter-map.md`](references/chapter-map.md).
+## Book
 
-This folder is an agent packaging of that book, not a reprint. No book text is copied here.
-Named rules (Boy Scout Rule, Three Laws of TDD, F.I.R.S.T., Law of Demeter, smell IDs) are
-the field's public vocabulary.
+Robert C. Martin, *Clean Code: A Handbook of Agile Software Craftsmanship*
+(Prentice Hall, 2008). Chapter map: [`references/chapter-map.md`](references/chapter-map.md).
+This folder is not a reprint of the book.
 
-The installable files were adapted from
-[btseee/clean-code-skills](https://github.com/btseee/clean-code-skills) v3.0.0 (MIT,
-Copyright (c) 2026 Battseren Badral), which is written for the same book.
+## GitHub PDF not used
+
+https://github.com/Gatjuat-Wicteat-Riek/clean-code-book hosts a PDFDrive scan of the
+copyrighted book. That file was not downloaded, copied, or used.
+
+## Agent packaging
+
+[btseee/clean-code-skills](https://github.com/btseee/clean-code-skills) v3.0.0. MIT.
+Copyright (c) 2026 Battseren Badral.
 
 | Book chapter | This skill |
 | --- | --- |
@@ -30,5 +34,3 @@ Copyright (c) 2026 Battseren Badral), which is written for the same book.
 | 14 Successive Refinement | references/project-refactor.md |
 | 15–16 Case studies | chapter-map.md |
 | 17 Smells and Heuristics | references/smell-triage.md, chapter-map.md |
-
-Martin's later book *Clean Architecture* (2017) is the `clean-architecture` skill.
