@@ -1,3 +1,0 @@
-interface:
-  display_name: "Clean Code"
-  short_description: "Enforce Clean Code on every source change"

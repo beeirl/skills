@@ -1,3 +1,0 @@
-interface:
-  display_name: "Scaffolding"
-  short_description: "Enforce Dune-style capability folders and public module contracts"

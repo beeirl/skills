@@ -4,6 +4,15 @@ This collection mixes original skills with copies and adaptations of public
 skill libraries. The original authors keep copyright in their work. This file
 records the sources that could be identified.
 
+## Lee (korallis) — skills-collection
+
+- Repository: https://github.com/korallis/skills-collection
+- License: MIT. Copyright (c) 2026 Korallis. See LICENSE.
+- This repository started as a copy of that collection at commit d744a1c. Skills original to it:
+  lee-engineering (adapted here as bee-mode), architect, arena, blast-radius, github-delivery,
+  interrogate, scaffolding, technical-writing, typescript-best-practices. The bee-mode adaptation
+  targets Paseo as harness, Claude Fable 5 as coordinator, and Grok as worker model.
+
 ## Matt Pocock — Skills For Real Engineers
 
 - Repository: https://github.com/mattpocock/skills
@@ -27,12 +36,12 @@ records the sources that could be identified.
 - Repository: https://github.com/RayFernando1337/rayfernando-skills
 - License: Apache License 2.0. Copyright 2026 Ray Fernando. See licenses/APACHE-2.0.txt.
 - Skills in this collection: bootstrap-ios, running-bug-review-board,
-  swiftui-animation-match, waves-codex.
+  swiftui-animation-match, waves (upstream folder: waves-codex).
 
 ## Further sources cited by those skills
 
 - Phillip Chaffee, public `deep-research` Cursor skill, credited in
-  waves-codex/references/adaptation-notes.md:
+  waves/references/adaptation-notes.md:
   https://github.com/PhillipChaffee/.cursor
 - Shubham Kumar Singh, SwiftUI-Animations catalog used by swiftui-animation-match:
   https://github.com/Shubham0812/SwiftUI-Animations (Apache-2.0)
