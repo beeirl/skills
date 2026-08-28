@@ -8,10 +8,12 @@ records the sources that could be identified.
 
 - Repository: https://github.com/korallis/skills-collection
 - License: MIT. Copyright (c) 2026 Korallis. See LICENSE.
-- This repository started as a copy of that collection at commit d744a1c. Skills original to it:
-  lee-engineering (adapted here as bee-mode), architect, arena, blast-radius, github-delivery,
-  interrogate, scaffolding, technical-writing, typescript-best-practices. The bee-mode adaptation
-  targets Paseo as harness, Claude Fable 5 as coordinator, and Grok as worker model.
+- This repository is maintained independently from a copy of that collection at commit e7904da.
+  Skills original to it:
+  lee-engineering and setup-lee-engineering (renamed here to bee-mode and setup-bee-mode, with the
+  Grok wrappers renamed to bee-grok, bee-grok-review, and bee-cursor-grok), architect, arena,
+  blast-radius, github-delivery, interrogate, scaffolding, technical-writing, and
+  typescript-best-practices.
 
 ## Matt Pocock — Skills For Real Engineers
 
@@ -36,7 +38,9 @@ records the sources that could be identified.
 - Repository: https://github.com/RayFernando1337/rayfernando-skills
 - License: Apache License 2.0. Copyright 2026 Ray Fernando. See licenses/APACHE-2.0.txt.
 - Skills in this collection: bootstrap-ios, running-bug-review-board,
-  swiftui-animation-match, waves (upstream folder: waves-codex).
+  swiftui-animation-match, waves.
+- The `waves` skill was renamed from `waves-codex` and generalised so it
+  no longer assumes a specific vendor CLI.
 
 ## Further sources cited by those skills
 
@@ -61,8 +65,6 @@ framework or a book:
   contain Dune source.
 - pstack public principle skills:
   https://github.com/cursor/plugins/tree/main/pstack/skills
-- Matilda OS `docs/audit/typescript-refactor-plan.md` §8 is the worked
-  application of that method. Matilda product source is not copied here.
 
 ## Writing sources cited by technical-writing
 

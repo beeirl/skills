@@ -88,9 +88,9 @@ Use the prompt template at
    B: 020–029) so parallel filers never collide; the merge renumbers
    only if a range overflowed.
 
-## Run the pass as a wave (when `waves` is installed)
+## Run the pass as a wave (when `waves` / `waves-codex` is installed)
 
-If the orchestration skill pair `waves`
+If the orchestration skill pair `waves` (Cursor) / `waves-codex` (Codex)
 is installed, run this mode as a bounded wave instead of hand-rolling the
 fan-out — the shard map above is the decomposition, and the waves
 discipline supplies what this mode historically lacked. The

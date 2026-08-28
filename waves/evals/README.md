@@ -7,6 +7,8 @@ iterate). Because `waves` is an *orchestration* skill, the unit under
 test is the **transcript** -- how the manager decomposed, fanned out,
 verified, and synthesized -- not just the final artifact.
 
+This skill was formerly named `waves-codex`.
+
 ## What's Here
 
 - `evals.json` -- the scenarios. Format follows the skill-creator convention:
@@ -22,15 +24,21 @@ verified, and synthesized -- not just the final artifact.
 
 ## How to Run (A/B Protocol)
 
-For each eval, run the prompt twice in fresh Paseo `claude` (Fable) sessions and save both
-transcripts:
+For each eval, run the prompt twice in fresh harness sessions (whatever
+agent CLI this eval is run in) and save both transcripts:
 
 1. **With skill** -- a session where `waves` is installed (the prompts
-   already say "Use the waves skill"). `paseo run --json` is useful
-   when a script needs the transcript as stable events.
+   already say "Use the waves skill").
 2. **Baseline** -- an identical fresh session without the skill installed
    (drop the "Use the waves skill" prefix). When comparing two
    *versions* of the skill, the baseline is the previous version instead.
+
+Save the full transcript the way this harness records a session.
+
+### Example: Codex transcript export
+
+`codex exec --json` is useful when a script needs the transcript as stable
+events. That is one harness's export syntax, not the required runner.
 
 Fresh sessions matter: leftover context from authoring or a prior run masks
 gaps. Copy any `files` fixtures into the session workspace first so relative
@@ -38,15 +46,15 @@ paths resolve. Suggested layout, per skill-creator:
 
 ```
 waves-workspace/iteration-N/eval-<id>/{with_skill,without_skill}/
-    transcript.md   # full transcript or --json event stream
+    transcript.md   # full session transcript as this harness records it
     output.md       # final deliverable only
     grading.json    # graded expectations (below)
 ```
 
-Note on triggering: `waves` sets `disable-model-invocation: true` and
-bee-mode only dispatches workers when the skill or user asks, so there is no
-trigger-accuracy suite. The only trigger check worth doing is a sanity check
-that invoking the skill by name actually loads it.
+Note on triggering: this skill is opt-in because a run spawns more workers
+than usual (`disable-model-invocation` is a common way to keep invocation
+explicit). There is no trigger-accuracy suite. Sanity-check that invoking
+the skill by name actually loads it.
 
 ## Grading Rules
 

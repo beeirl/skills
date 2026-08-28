@@ -1,0 +1,3 @@
+interface:
+  display_name: "Clean Architecture"
+  short_description: "Enforce the Dependency Rule on new files and imports"

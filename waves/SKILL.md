@@ -1,43 +1,33 @@
 ---
 name: waves
-description: WAVES - Workers, Aggregate, Verify, Extend - wave-based orchestration for bee-mode. Fable plans; Grok workers run under Paseo. Decompose a big goal into independent slices, verify coverage, dispatch Grok workers in parallel as a bounded wave, collect evidence-backed handoffs, verify important claims, synthesize one deliverable, and extend into another wave only when warranted. Bounded by design to avoid runaway token loops; invoke deliberately. Formerly waves-codex; also fan out, parallelize, spin up multiple agents, orchestrate workers, multi-stream research, audit a repo, split disjoint implementation work.
+description: WAVES - Workers, Aggregate, Verify, Extend - wave-based orchestration. Decompose a big goal into independent slices, verify coverage, spawn workers in parallel as a bounded wave, collect evidence-backed handoffs, verify important claims, synthesize one deliverable, and extend into another wave only when warranted. Bounded by design to avoid runaway token loops; invoke deliberately. Formerly waves-codex; formerly parallel-orchestrate-codex; also fan out, parallelize, spin up multiple agents, orchestrate workers, multi-stream research, audit a repo, split disjoint implementation work.
 ---
 
-# WAVES — Workers · Aggregate · Verify · Extend (bee-mode)
+# WAVES — Workers · Aggregate · Verify · Extend
 
-Run **wave-based orchestration** with Grok workers dispatched through Paseo. A **wave** is a bounded
-round of isolated workers in parallel, then a round that verifies what came back,
-then a deliberate decision to build on it — not an open-ended loop. Use this skill
-when a task is too broad for one clean linear pass but can be split into
-independent slices. You are the manager: discover the problem shape, stage and
-verify coverage, decompose it, dispatch bounded Grok workers, collect one structured
-handoff from each worker, verify important claims, and synthesize the final
-deliverable.
+Run **wave-based orchestration** with the current harness's workers/subagents.
+A **worker** is a bounded session with a fixed packet and a required return
+shape from `references/handoff-format.md`. Dispatch workers the way this
+harness dispatches them (Task tool, spawn_agent, background agents, or
+whatever the live surface exposes — do not require one vendor's tool names).
+Model selection comes from `~/.agents/routes.json` after `bin/agent-routes
+scan`; prefer `sourceKind: harness`. A vendor CLI is a fallback only for a
+family or capability the harness cannot provide. `family` decides review
+independence; `pool` decides scheduling.
+
+A **wave** is a bounded round of isolated workers in parallel, then a round
+that verifies what came back, then a deliberate decision to build on it —
+not an open-ended loop. Use this skill when a task is too broad for one
+clean linear pass but can be split into independent slices. You are the
+manager: discover the problem shape, stage and verify coverage, decompose
+it, spawn bounded workers, collect one structured handoff from each worker,
+verify important claims, and synthesize the final deliverable.
 
 **The shape of every wave — WAVE:** Workers fan out across disjoint slices ->
-Aggregate their handoffs -> Verify the evidence (the moat) -> Extend into another
-wave only when warranted. A loop doesn't know when to stop; a wave does, because
-verification is the stop function. (Invoke deliberately - a run spawns more agents
-than usual.)
-
-Dispatch surface (bee-mode, checked 2026-08-28 against Paseo 0.6.1 and Grok CLI 1.0.5): the
-manager is the Paseo `claude` agent on `claude-fable-5`. Each worker is one Paseo agent:
-
-```bash
-paseo run --provider grok/grok-4.6 --cwd <repo> --new-workspace worktree \
-  --env GROK_MEMORY=0 -d --json --title "wave-1/<slice>" "<self-contained worker prompt>"
-paseo wait <id>                # block only when synthesis needs it
-paseo logs <id> --json         # collect the handoff
-paseo stop <id>                # budget or scope breach
-```
-
-Read-only slices add `--env GROK_SUBAGENTS=0` and may drop `--new-workspace`. A fixed-artifact
-verifier slice can instead use `bee-grok-review` (one turn, no tools, Grok 4.6 low effort). Workers
-never spawn their own workers; the manager runs every wave. The concurrency bound is the number of
-Paseo agents you can verify at once (default 4 per wave). Grok's effort is not settable per
-`paseo run`; the default in `~/.grok/config.toml` applies, and `bee-grok --reasoning-effort` sets it
-for a direct launch. Every Paseo-dispatched Grok agent, `bee-grok`, and `bee-grok-review` draw from
-one Grok capacity pool; read `bee-mode/references/capacity-routing.md` before each wave.
+Aggregate their handoffs -> Verify the evidence (the moat) -> Extend into
+another wave only when warranted. A loop doesn't know when to stop; a wave
+does, because verification is the stop function. (Invoke deliberately - a
+run spawns more agents than usual.)
 
 Read these references when using the skill:
 
@@ -45,8 +35,8 @@ Read these references when using the skill:
 - `references/verification.md` for verification gates and verifier-worker
   playbooks.
 - `references/examples.md` for decomposition recipes.
-- `references/recommended-config.md` for Grok and Paseo configuration.
-- `references/adaptation-notes.md` for the Cursor-to-Codex and Codex-to-Paseo translation notes.
+- `references/recommended-config.md` for config and custom agent snippets.
+- `references/adaptation-notes.md` for adapting this skill across harnesses.
 
 ## When to Use
 
@@ -70,19 +60,20 @@ Read these references when using the skill:
 ## Core Principles
 
 1. The manager plans, verifies, and synthesizes. Workers do heavy reading,
-   research, tests, audits, bounded edits, or focused claim checks.
+   research, tests, audits, bounded edits, or focused claim checks. The
+   manager/coordinator uses a high-capability harness route.
 2. Worker prompts are self-contained. Do not assume workers can infer the user's
    original request, your scratch reasoning, or sibling work unless you
-   intentionally pass that context. A Paseo-dispatched Grok worker starts with an
-   empty context: it sees only its prompt, the checkout, and the skills on disk.
+   intentionally pass or fork that context. If the harness forks parent history
+   by default, request fresh-context workers for disjoint slices, and keep
+   prompts self-contained either way.
 3. One worker owns one slice and returns one handoff.
 4. Verify before you trust. A worker's `Status: success` is a claim, not
    evidence.
 5. Parallel reads are the default safe case.
-6. Parallel writes require disjoint ownership or isolated worktrees. Use
-   `--new-workspace worktree` for every writing worker; one writer per checkout
-   (the writer lease in `bee-mode/references/model-routing.md`). Write conflicts
-   are still a coordination problem at merge time.
+6. Parallel writes require disjoint ownership or isolated worktrees. Write
+   conflicts are still a coordination problem even when workers run in separate
+   sandboxes or worktrees.
 7. Continuous motion (within the stated budget). Handoffs reveal new work; treat
    each open question or suggested follow-up as a candidate second-wave task and
    spawn it. Keep going until every slice is terminal and the synthesis is
@@ -103,9 +94,10 @@ non-monotonic (more iterations can lower quality, not just cost). Equally real
 is the opposite failure: stopping while the manifest still has open slices.
 Keep the exploration, drop the runaway, never abandon un-terminal work.
 
-- Width: 3-8 workers per wave, and no more Paseo agents than you can fully
-  verify (default 4; batch wider waves). Go wider only with a cheap automatic
-  check (tests, `paseo run --output-schema`, schema/exec) gating results.
+- Width: 3-8 workers per wave, and within the harness worker concurrency cap.
+  If the cap is unknown, batch 3-8. Size the wave so you can fully verify all
+  of it. Go wider only with a cheap automatic check (tests, schema/exec)
+  gating results.
   (Grounding: homogeneous-agent teams plateau around N~4-8 - added workers
   contribute redundant evidence, and diversity, not head count, escapes the
   ceiling - arXiv 2606.02646, 2602.03794.)
@@ -122,12 +114,12 @@ Keep the exploration, drop the runaway, never abandon un-terminal work.
   2603.11445; convergence-based stopping beats fixed `max_iterations` at parity
   quality - arXiv 2606.27009.)
 - Scouting is cheap - don't let it eat the budget. Entropy-reduction waves
-  (scouting, decomposition) run on cheap models/low effort and count separately
-  from the execution budget. Never end a run "out of waves" when the budget was
-  consumed by discovery before execution started.
+  (scouting, decomposition) run on a cheaper/faster harness route and count
+  separately from the execution budget. Never end a run "out of waves" when the
+  budget was consumed by discovery before execution started.
 - Budget ~60% generation / 40% verification; selection is the scarce resource.
 - Match width to difficulty: easy -> 1 + light refine; medium -> 3-5;
-  hard/open-ended -> 5-8 for diversity; hardest/novel -> escalate reasoning/model,
+  hard/open-ended -> 5-8 for diversity; hardest/novel -> escalate reasoning/route,
   don't loop.
 - Anti-poisoning: carry only a distilled, verified handoff (winner + short
   critique) into the next wave, never raw transcripts or losing candidates.
@@ -168,8 +160,8 @@ surviving interpretations roughly in half):
    read schema/README, grep, sample data). This is Step 0; it often collapses
    most of the uncertainty for free.
 2. Then pull from attached resources: if local state lacks the answer, spawn a
-   small scouting wave of read-only Grok workers to fetch it (docs, MCP, web)
-   at low or medium effort (see Step 2).
+   small scouting wave of explorer/research workers to fetch it (docs, MCP,
+   web) on a cheaper/faster harness route (see Step 2).
 3. Ask the user last, and only when it pays: when residual specification
    uncertainty is high and a question's expected information gain beats its cost.
    Most requests carry enough to proceed on a stated assumption.
@@ -178,15 +170,14 @@ Then cascade: one request becomes a decomposition wave (understand -> locate
 unknowns -> draft the plan) -> verify -> an execution wave that builds the
 subtasks least-to-most (each verified result lowering uncertainty for the next),
 with more scouting sub-waves wherever entropy stays high. Track the living plan
-in the bee-mode task ledger; stop reducing when entropy is low enough to act -- the
-verification gate doubles as "is the uncertainty low enough to commit?" (Worked
-example: `references/examples.md`.)
+with the harness plan/todo surface; stop reducing when entropy is low enough to
+act -- the verification gate doubles as "is the uncertainty low enough to
+commit?" (Worked example: `references/examples.md`.)
 
 ## The Loop
 
-Track the run in the bee-mode task ledger (the coordinator's durable plan surface)
-whenever the workflow has more than a couple of moving parts, and give every Paseo
-agent a `--title` that names its wave and slice.
+Track the run with the harness plan/todo surface whenever the workflow has more
+than a couple of moving parts.
 
 ### Step 0 - Discover Serially
 
@@ -204,9 +195,10 @@ mis-sized chunks.
 
 ### Step 0.5 - Stage and Verify Coverage
 
-Paseo-dispatched Grok workers get Grok's own tools, MCP servers, and skills, plus
-the checkout, so remote or messy data does not always need to be staged first. Still stage
-data when it reduces risk or repeated work:
+Workers typically inherit the current sandbox, approvals, MCP, and tool access
+unless the harness isolates them, so remote or messy data does not always need
+to be staged locally first. Still stage data when it reduces risk or repeated
+work:
 
 - Export remote/database data once if credentials, rate limits, or query cost
   would make every worker redo the same setup.
@@ -253,10 +245,10 @@ For a large wave, usually 5 or more workers, state the decomposition plan and
 the pre-fan-out coverage gate to the user before spawning so they can redirect
 cheaply.
 
-Respect the concurrency bound (default 4 Paseo agents per wave). If you need
-more slices than that, batch them into waves.
+Respect the harness worker concurrency cap. If the cap is unknown, batch 3-8.
+If you need more slices than available slots, batch them into waves.
 
-Then triage each slice on three axes (classify-and-act): the **worker role**
+Then triage each slice on three axes (classify-and-act): the **role**
 (table in Step 2), its **dependencies** (which slices it needs verified output
 from -- most have none; a real dependency edge is what separates waves), and a
 **verification tier** - `auto-accept` (low-stakes, corroborated) ->
@@ -274,58 +266,71 @@ dependent slice with the distilled, verified findings (or their
 `.waves/<run>/` path) folded into its self-contained prompt, and keep
 unrelated slices parallel. The manifest doubles as the **completion gate**: N
 rows spawned means N handoffs collected and checked off before synthesis
-(Step 3). It is also the **spawn-plan audit**: review it before dispatch, and keep
-each worker prompt in `.waves/<run>/prompts/<slice>.md` so it can be inspected later.
+(Step 3). It is also the **spawn-plan audit**: the manifest review before
+spawning is the point where a human (or the manager) can inspect what each
+worker was asked to do.
 
-### Step 2 - Fan Out with Paseo-Dispatched Grok Workers
+### Step 2 - Fan Out with workers
 
-Dispatch all workers whose dependencies are met (handoffs verified, not just
-returned) back to back with `paseo run ... -d --json`, record each returned
-agent ID in the manifest, then continue manager-side work and `paseo wait` only
-when synthesis is blocked.
+Spawn all workers whose dependencies are met (handoffs verified, not just
+returned) in the same manager turn when possible. The stable interaction is
+explicit: spawn one worker per slice, wait for all of them, then
+summarize/synthesize. Dispatch each worker the way this harness dispatches
+workers. Recursion (workers spawning workers) is off by default;
+manager-driven sequential waves are the encouraged shape.
 
-Pick the smallest capable role and state it in the prompt:
+Pick the smallest capable role, then pick a route from
+`~/.agents/routes.json` (after `bin/agent-routes scan`) for that role,
+preferring `sourceKind: harness`:
 
-| Slice | Worker shape | Notes |
+| Slice | Role | Notes |
 | --- | --- | --- |
-| Read-heavy code/data exploration | Grok 4.6, read-only packet, `--env GROK_SUBAGENTS=0`, no worktree | Low or medium effort. Ask for evidence and counts, not edits. |
-| General research, docs, MCP/web work | Grok 4.6, read-only packet | Workers inherit Grok's MCP servers and web search. |
-| Implementation or fixes | Grok 4.6, `--new-workspace worktree --new-branch wave/<slice>` | Explicit file/module ownership; one writer per worktree. |
-| Review/security/test-risk audit | `bee-grok-review` on a fixed artifact, or a read-only Paseo worker | Different family from the Fable manager, so it also satisfies the independent-review gate. |
-| Browser/UI investigation | Grok 4.6 with browser MCP configured | Ask for evidence, not broad edits. |
-| Verification of important claims | `bee-grok-review` with claim + cited sources | No generator reasoning, no authorship labels. |
-| Many row-shaped tasks | One `paseo run` per row, batched to the concurrency bound | Use `--output-schema` for machine-readable results. |
+| Read-heavy code/data exploration | explorer / scouting | Cheaper/faster harness route. Targeted codebase questions and evidence gathering. |
+| General research, docs, MCP/web work | researcher | Capable route with web/docs access. Use a custom agent when the research shape repeats. |
+| Implementation or fixes | worker / implementation | Capable coding route. Give explicit ownership of files/modules and warn that other workers may be active. |
+| Review/security/test-risk audit | reviewer | Prefer a different `family` from the author when independence matters. Read-only when the harness supports it; higher-capability route. |
+| Browser/UI investigation | custom browser debugger | Give browser tooling and ask for evidence, not broad edits. |
+| Verification of important claims | verifier | Prefer a different `family` from the author. Give claim + cited sources, not the generator's reasoning. |
+| Many row-shaped tasks | batch/CSV spawn if present | If the harness has a batch/CSV spawn, use it; otherwise one worker per row. |
 
-Inline the role's instructions in every worker prompt; there is no role registry
-to fall back on, and a missing role is not permission to skip it.
+A missing role is not permission to skip it. When a custom role you want is
+unavailable in the active surface, spawn the harness's default worker with
+that role's instructions inlined in the worker prompt instead of dropping the
+role.
 
-Model and effort routing: `grok-4.6` is the only worker model (`grok-4.5` is a
-same-pool fallback, not a cheaper tier). Effort comes from `~/.grok/config.toml`
-for Paseo dispatches and from `--reasoning-effort` on `bee-grok`; use `low` or
-`medium` for scouting and research, `high` for implementation and verification.
-The Fable manager keeps orchestration, deep problem solving, and pre-fan-out
-synthesis; do not delegate those. **Verify what actually ran**: read the model
-and mode from `paseo inspect <id>` rather than trusting the requested settings.
-Honor any model or effort the user named; if it is unavailable, say so rather
-than substituting.
+Route by role, not by a hardcoded model slug. Scouting and read-heavy slices
+use a cheaper/faster harness route; implementation, verification, and
+synthesis use capable routes; independent review uses a different `family`
+from the author. Honor any model the user named; if that model is unavailable,
+say so rather than substituting. Pins are advisory: verify the model that
+actually ran (check each worker's reported model, or judge by output quality)
+instead of trusting the requested settings. A vendor CLI is a fallback only
+for a family or capability the harness cannot provide. `family` decides
+review independence; `pool` decides scheduling.
+
+Match reasoning effort to the slice: `low`/`medium` for scouting and
+all-around research, `high` for coding and verifying, higher effort for
+orchestration, deep problem solving, and pre-fan-out synthesis. Escalate a
+stuck high-stakes slice on a capable route before widening the wave. Honor a
+user-named speed or effort preference; do not force one.
 
 ### Step 3 - Collect and Verify Handoffs
 
-Paseo tracks every worker: `paseo ls` shows status, `paseo wait <id>` blocks
-until idle, `paseo logs <id> --json` returns the transcript, and
-`paseo send <id> "<message>"` re-tasks a worker in place.
+The harness handles spawning, routing follow-ups, waiting, and closing in the
+manager workflow. When many workers are running, wait until all requested
+results are available before synthesizing.
 
 **Completion gate first:** check every handoff off against the wave manifest -
 N spawned means N accounted for. A worker that never returns, errors out, or
 comes back `partial`/`blocked` is a hole in the wave. **Worker failure
-ladder:** (1) re-task once, narrower -- `paseo send <id>` when the slice just
-needs continuation, or re-spawn fresh with a narrower scope and a
-note about what came back. Re-task the same worker only for continuation of
-its own slice -- it keeps its prior context, which contaminates an unrelated
-assignment; (2) if it fails again, do that slice in the manager thread; (3) if
-it stays blocked, carry the slice into the synthesis explicitly as
-`not-covered` - never average over a missing slice as if coverage were
-complete.
+ladder:** (1) re-task once, narrower -- steer or continue the same worker when
+the harness supports a follow-up on that session, or re-spawn fresh with a
+narrower scope and a note about what came back. Re-task the same worker only
+for continuation of its own slice -- it keeps its prior context, which
+contaminates an unrelated assignment; (2) if it fails again, do that slice in
+the manager thread; (3) if it stays blocked, carry the slice into the
+synthesis explicitly as `not-covered` - never average over a missing slice as
+if coverage were complete.
 
 Avoid manual polling loops. Continue non-overlapping local work while workers
 run; wait only when synthesis is blocked on their results. For each handoff:
@@ -371,8 +376,10 @@ citation-heavy, single-sourced, or low-confidence. Give the verifier:
   as their own; blind them).
 
 The verifier returns `supported`, `partly-supported`, `unsupported`, or
-`source-not-found` per claim. For many claims, run one `bee-grok-review` or
-`paseo run --output-schema` per claim, batched to the concurrency bound.
+`source-not-found` per claim. For many claims, prefer a row-shaped verifier
+pass: if the harness has a batch/CSV spawn, use it (one claim per row); otherwise
+spawn ordinary verifier workers, one per row or batched under the concurrency
+cap. Prefer a different `family` from the author when independence matters.
 
 ### Step 4 - Second Waves (continuous motion)
 
@@ -397,9 +404,10 @@ which one applies when you decide: the remaining open items are
 open items), or **genuinely contested** (independent quality sources disagree;
 record the disagreement instead of sampling more).
 
-Sequential second and third waves are dispatched by the manager and are
-encouraged. Workers do not spawn workers: pass `--env GROK_SUBAGENTS=0` to
-read-only packets and keep implementation workers to their own slice.
+Sequential second and third waves are spawned by the manager and are
+encouraged. Recursion (a worker spawning its own sub-workers) is off by
+default; raise it deliberately and tightly only if a recursive subplanner is
+truly needed. Manager-driven waves need no such change.
 
 ### Step 5 - Deliver One Synthesized Artifact
 
@@ -414,8 +422,8 @@ If implementation is required after the research wave, either:
 
 - Make the edits yourself in the manager thread after reading all handoffs.
 - Spawn a bounded implementation wave with disjoint file ownership.
-- Use one `paseo run --new-workspace worktree` per attempt for heavier parallel
-  code work.
+- Use isolated git worktrees, one worker process per worktree, for heavier
+  parallel code attempts.
 
 Verify the deliverable itself:
 
@@ -427,19 +435,22 @@ Verify the deliverable itself:
 
 ## Worker Prompt Contract
 
-Every worker prompt includes:
+Every worker is a bounded session. Dispatch it the way this harness dispatches
+workers. The packet is self-contained and includes:
 
-1. Overall goal as context only.
-2. The worker's exact slice and ownership.
-3. Where to look: paths, data ranges, URLs, MCP/docs sources, commands, or repo
-   modules.
-4. Coverage rule: read the assigned slice completely when feasible, report
-   counts read such as `388/388`, and call out skipped files/ranges.
-5. Evidence rule: cite-or-drop every important claim, tag confidence
-   (`high|med|low`), and say what would change the conclusion.
-6. What not to do: avoid owning the whole task, avoid sibling scopes, avoid
-   editing unless explicitly assigned.
-7. The required handoff format from `references/handoff-format.md` - and keep
+1. Objective (overall goal as context only).
+2. Non-goals: avoid owning the whole task, avoid sibling scopes, avoid editing
+   unless explicitly assigned.
+3. The worker's exact slice and ownership.
+4. Permitted paths / where to look: paths, data ranges, URLs, MCP/docs sources,
+   commands, or repo modules.
+5. Acceptance: coverage rule (read the assigned slice completely when feasible,
+   report counts read such as `388/388`, and call out skipped files/ranges) and
+   evidence rule (cite-or-drop every important claim, tag confidence
+   (`high|med|low`), and say what would change the conclusion).
+6. Chosen `routeId` from `~/.agents/routes.json` (after `bin/agent-routes
+   scan`; prefer `sourceKind: harness`).
+7. The required return shape from `references/handoff-format.md` - and keep
    it a digest: roughly 15 findings max with one-line evidence each; large
    artifacts (tables, logs, full lists) go to a file, cite the path.
 
@@ -447,17 +458,23 @@ End every worker prompt with the copy-paste ending for its worker type
 (generic, research, implementation, or verifier) from
 `references/handoff-format.md` § "Prompt endings per worker type".
 
-## Row-Shaped Fan-Out
+## CSV / Row Fan-Out
 
-When the work is naturally one row per worker (files, incidents, packages, PRs,
-migration targets, messages, customer records, or claims to verify):
+When the work is naturally one row per worker — files, incidents, packages,
+PRs, migration targets, messages, customer records, or claims to verify — use
+the harness batch/CSV spawn if it is present; otherwise spawn one worker per
+row, batched under the concurrency cap.
 
-- Write `rows.csv` with a stable `id` column and enough per-row context for a
-  self-contained prompt.
-- Render one prompt per row from a template and dispatch one `paseo run` per
-  row, batched to the concurrency bound; pass `--output-schema` when downstream
-  synthesis needs machine-readable results.
-- Collect each result with `paseo logs <id> --json` into `.waves/<run>/rows/`.
+Manager responsibilities:
+
+- Create a table/CSV with a stable id column.
+- Put enough per-row context in columns for a self-contained prompt.
+- Provide an instruction template with column placeholders.
+- Provide an output schema when downstream synthesis needs machine-readable
+  results.
+- Require each worker to return once in the handoff (or harness job-result)
+  shape.
+- Cap concurrency at the harness worker limit (if unknown, batch 3-8).
 
 For a verifier pass, build `claims.csv` with `claim_id`, `claim`, `sources`,
 `acceptance_question`, and optional `stakes`. Require JSON fields: `verdict`,
@@ -469,56 +486,65 @@ For open-ended ideation or "produce the single best X", generate several
 candidates and filter rather than trusting one attempt:
 
 - Cheap filter first: gate candidates through a near-ground-truth check (tests,
-  `paseo run --output-schema`, schema/exec, dedup/clustering) before spending
-  judge tokens. Generation is cheap; judging is not.
+  schema/exec, dedup/clustering) before spending judge tokens. Generation is
+  cheap; judging is not.
 - Selection ladder, not all-pairs: dedup/cluster -> shortlist -> pairwise-judge
   only among finalists. A naive O(N^2) tournament wastes tokens on also-rans.
-- Competing implementations: one `paseo run --new-workspace worktree` per
-  attempt (see the `arena` skill), then inspect/test/merge the winner.
+- Competing implementations: use isolated git worktrees and one worker process
+  per attempt, then inspect/test/merge the winner.
 - Budget check: at equal cost, k independent attempts plus a majority vote or
   cheap filter usually beats critique/debate loops -- benchmark any iterative
   loop against that baseline before paying for it.
 
 ## Parallel Writes
 
-Grok workers are a good fit for parallel write work when each one has its own
-Paseo worktree or disjoint ownership. Still treat write coordination as a real
+Workers are a good fit for parallel write work when you use worktrees, separate
+sandboxes, or disjoint ownership. Still treat write coordination as a real
 merge problem:
 
 - Read/research/test/log analysis: safe default.
-- Disjoint edits in one checkout: acceptable only when ownership is explicit,
-  paths do not overlap, and the writer lease is recorded.
+- Disjoint edits in one checkout: acceptable when ownership is explicit and
+  paths do not overlap.
 - Overlapping edits: avoid. Have workers propose handoffs, then implement
   serially.
-- Competing implementations: one `paseo run --new-workspace worktree` per
-  attempt.
+- Competing implementations: isolated git worktrees, one worker process per
+  worktree.
 - Always inspect and test the merged result in the manager thread.
 
-## Verification Surfaces
+## Native Verification Surfaces
 
 Use these where they fit:
 
 - Tests, validators, type checks, linters, browser checks, and direct source
   recounts are the strongest verification signals.
-- `bee-grok-review` is the dedicated verifier: fixed artifact, one turn, no
-  tools, different model family from the Fable manager.
-- `paseo run --output-schema` gives machine-readable verification results.
-- `interrogate` runs a multi-reviewer panel with consensus tagging for
-  contested or high-stakes claims.
+- Dedicated verifier workers are the native replacement for a claim-check
+  pass; prefer a different `family` from the author when independence matters.
+- A row-shaped verifier pass (batch/CSV spawn if present, else one worker per
+  row) is ideal when many claims need the same acceptance question.
+- Prefer a deterministic validator or schema when another process needs
+  machine-readable results.
 
-## Escalating Beyond One Interactive Session
+## Escalating Beyond One Interactive Thread
 
-Use this skill for interactive, bounded fan-out inside one bee-mode task. For
-long-horizon work, Paseo agents are durable: workers survive the manager's
-session, `paseo ls` lists them, `paseo attach <id>` reopens one, and
-`paseo schedule` runs recurring waves. Keep the same handoff discipline: never
-pull a full worker transcript into the manager; collect the structured handoff.
-Title workers consistently and track them in the manifest, archive them
-(`paseo archive <id>`) when merged.
+Use this skill for interactive, bounded fan-out inside one task.
+
+If the harness offers durable threads, the same handoff discipline applies:
+message a worker thread and require the structured handoff back; never pull a
+full worker transcript into the coordinator. Reuse a worker thread only for
+its own lane, never for an unrelated slice. Otherwise use ordinary workers.
+
+For scripted or CI-style fleets, run one worker process per git worktree with
+explicit sandbox and route settings. Prefer machine-readable results when
+another script needs stable events.
+
+For always-on, team-scale orchestration, use the Symphony pattern: an issue
+tracker or queue as the control plane, one agent workspace per item, bounded
+concurrency, retries, observability, and human review. Treat Symphony as a
+reference/spec pattern, not a drop-in replacement for this interactive skill.
 
 ## Checklist
 
-- [ ] Tracked multi-wave work in the task ledger and titled every Paseo agent.
+- [ ] Used the harness plan/todo surface for multi-wave work.
 - [ ] Discovered the shape of the problem before decomposing.
 - [ ] Reduced entropy before slicing (dug locally -> pulled from attached
       resources -> asked the user only if it paid); sliced the low-entropy goal.
@@ -529,18 +555,20 @@ Title workers consistently and track them in the manifest, archive them
 - [ ] Verified coverage before spawning: counts, bounds, partition-sum,
       gaps/duplicates.
 - [ ] Slices are independent (or their `depends_on` edges recorded) and sized
-      to the concurrency bound.
+      to the harness concurrency cap (if unknown, batch 3-8).
 - [ ] Wrote the wave manifest (slice / role / effort / depends_on /
       verification tier) before spawning; launched dependent slices only after
       their dependencies' handoffs were verified; checked every row off at
       collection (completion gate); ran the failure ladder on missing/blocked
       slices.
-- [ ] Each worker prompt is self-contained and ends with the handoff contract.
-- [ ] Picked read-only worker, implementation worker in a worktree,
-      `bee-grok-review`, or row-shaped fan-out deliberately.
-- [ ] Ran scouting / read-heavy waves at low or medium effort; used high effort
-      for implementation and verification; kept orchestration and synthesis in
-      the Fable manager.
+- [ ] Each worker prompt is self-contained, names a `routeId` from the scan,
+      and ends with the handoff contract.
+- [ ] Picked explorer, worker, researcher, reviewer, verifier, or row-shaped
+      fan-out deliberately; inlined a missing role on the default worker rather
+      than skipping it.
+- [ ] Routed scouting / read-heavy waves to a cheaper/faster harness route;
+      reserved a capable route for coding, verification, and synthesis; used a
+      different `family` for independent review.
 - [ ] Avoided manual polling loops; waited only when synthesis was blocked.
 - [ ] Read every handoff and resolved conflicts.
 - [ ] Preserved per-finding confidence labels.

@@ -14,9 +14,5 @@ Primary sources:
 - [pstack public principles](https://github.com/cursor/plugins/tree/main/pstack/skills):
   model the domain, boundary discipline, minimise reader load, type-system
   discipline, idempotent operations.
-- Matilda OS `docs/audit/typescript-refactor-plan.md` §8, the worked
-  application of that method: capability folders, explicit public module
-  contracts, one data owner, and mechanically enforced boundaries.
 
-The skill is original packaging. It is not Dune source, a pstack copy, or a
-Matilda module dump.
+The skill is original packaging. It is not Dune source or a pstack copy.
