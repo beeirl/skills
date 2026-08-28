@@ -43,7 +43,7 @@ for skill in skills/*/; do
   case "$name" in
     .git|licenses|bee-mode) continue ;;
   esac
-  rm -rf ~/.agents/skills/"$name" && cp -R "$skill" ~/.agents/skills/
+  rm -rf ~/.agents/skills/"$name" && cp -R "${skill%/}" ~/.agents/skills/
 done
 ```
 
