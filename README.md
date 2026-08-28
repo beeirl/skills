@@ -1,8 +1,10 @@
-# Skills collection
+# beeirl skills
 
-Working set of agent skills used across local engineering agents. Each skill is a directory with a `SKILL.md` file, plus optional `references/`, `agents/`, and `scripts/` files.
+Agent skills for bee-mode: Paseo as harness, Claude Fable 5 as coordinator, Grok 4.6 as worker model. Each skill is a directory with a `SKILL.md` file, plus optional `references/`, `scripts/`, and `tests/` files. The same files load in Claude Code and in Grok.
 
-This repository is a public snapshot of the live tree at `~/.agents/skills` (also linked from `~/.claude/skills`). `lee-engineering` is the default router for software work. It loads the other skills only when they apply.
+This repository is a snapshot of the live tree at `~/.agents/skills` (also linked from `~/.claude/skills`). `bee-mode` is the default router for software work. It loads the other skills only when they apply.
+
+This collection started as a copy of [korallis/skills-collection](https://github.com/korallis/skills-collection) and is maintained independently; see [NOTICE.md](NOTICE.md).
 
 Most skills here come from these sources. Use the linked repositories for upstream copies where they exist:
 
@@ -27,21 +29,21 @@ Typical install locations:
 A skill is available as soon as its folder is present. You do not register it in a separate manifest.
 
 ```bash
-git clone https://github.com/korallis/skills-collection.git
-cp -R skills-collection/lee-engineering ~/.agents/skills/
+git clone https://github.com/beeirl/skills.git
+python3 skills/bee-mode/scripts/install.py install --json   # bee-mode, bee-grok wrappers, Grok approve mode
 ```
 
 To install every skill:
 
 ```bash
-git clone https://github.com/korallis/skills-collection.git
-mkdir -p ~/.agents/skills
-for skill in skills-collection/*/; do
+git clone https://github.com/beeirl/skills.git
+python3 skills/bee-mode/scripts/install.py install --json
+for skill in skills/*/; do
   name=$(basename "$skill")
   case "$name" in
-    .git|licenses) continue ;;
+    .git|licenses|bee-mode) continue ;;
   esac
-  cp -R "$skill" ~/.agents/skills/
+  rm -rf ~/.agents/skills/"$name" && cp -R "$skill" ~/.agents/skills/
 done
 ```
 
@@ -51,7 +53,7 @@ Skip directories that are not skills. `LICENSE`, `NOTICE.md`, `README.md`, `.git
 
 | Skill | Role | Source |
 | --- | --- | --- |
-| [lee-engineering](lee-engineering/) | Router for software work. Selects specialist skills, local multi-model routing, verification, and GitHub delivery. | Original |
+| [bee-mode](bee-mode/) | Router for software work in bee-mode. Selects specialist skills, dispatches Grok workers through Paseo, verification, and GitHub delivery. | Adapted from [korallis/skills-collection](https://github.com/korallis/skills-collection) `lee-engineering` |
 | [architect](architect/) | Architecture-first design for changes that cross modules, contracts, or domain concepts. | Original |
 | [codebase-design](codebase-design/) | Vocabulary and method for deep modules, seams, and testable interfaces. | [mattpocock/skills](https://github.com/mattpocock/skills) · [codebase-design](https://github.com/mattpocock/skills/tree/main/skills/engineering/codebase-design) |
 | [improve-codebase-architecture](improve-codebase-architecture/) | Scan for deepening opportunities, present an HTML report, then grill the chosen one. | [mattpocock/skills](https://github.com/mattpocock/skills) · [improve-codebase-architecture](https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture) |
@@ -78,7 +80,7 @@ Skip directories that are not skills. `LICENSE`, `NOTICE.md`, `README.md`, `.git
 | [to-tickets](to-tickets/) | Break a plan into tracer-bullet tickets with blocking edges. | [mattpocock/skills](https://github.com/mattpocock/skills) · [to-tickets](https://github.com/mattpocock/skills/tree/main/skills/engineering/to-tickets) (adapted) |
 | [handoff](handoff/) | Compact the current conversation into a handoff for the next agent. | [mattpocock/skills](https://github.com/mattpocock/skills) · [handoff](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) |
 | [arena](arena/) | Isolated competing candidates, judged against shared criteria. | Original |
-| [waves-codex](waves-codex/) | Bounded wave orchestration for Codex: workers, aggregate, verify, extend. | [RayFernando1337/rayfernando-skills](https://github.com/RayFernando1337/rayfernando-skills) · [waves-codex](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/waves-codex/skills/waves-codex) |
+| [waves](waves/) | Bounded wave orchestration for bee-mode: Fable plans, Grok workers run under Paseo. | [RayFernando1337/rayfernando-skills](https://github.com/RayFernando1337/rayfernando-skills) · [waves](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/waves-codex/skills/waves-codex) |
 | [research](research/) | Investigate a question against primary sources and write findings into the repo. | [mattpocock/skills](https://github.com/mattpocock/skills) · [research](https://github.com/mattpocock/skills/tree/main/skills/engineering/research) |
 
 ## Sources
@@ -104,9 +106,9 @@ Docs for several of these skills also live on [aihero.dev](https://www.aihero.de
 
 Apache License 2.0. Copyright 2026 Ray Fernando. License text: [licenses/APACHE-2.0.txt](licenses/APACHE-2.0.txt).
 
-Copied here: `bootstrap-ios`, `running-bug-review-board`, `swiftui-animation-match`, and `waves-codex`.
+Copied here: `bootstrap-ios`, `running-bug-review-board`, `swiftui-animation-match`, and `waves` (from `waves-codex`, re-targeted to Paseo and Grok).
 
-`waves-codex` also credits [Phillip Chaffee's public `deep-research` Cursor skill](https://github.com/PhillipChaffee/.cursor) for run-shape triage and dependency-aware dispatch. `swiftui-animation-match` catalogs [Shubham Kumar Singh's SwiftUI-Animations](https://github.com/Shubham0812/SwiftUI-Animations). `bootstrap-ios` routes to community packs listed in [bootstrap-ios/references/sources.md](bootstrap-ios/references/sources.md), including [Paul Hudson / Hacking with Swift](https://github.com/twostraws/swift-agent-skills), [Antoine van der Lee](https://github.com/AvdLee), [OpenAI plugins](https://github.com/openai/plugins), [Krzysztof Zablocki](https://merowing.info/posts/stop-getting-average-code-from-your-llm/), and [XcodeBuildMCP](https://github.com/getsentry/XcodeBuildMCP).
+`waves` also credits [Phillip Chaffee's public `deep-research` Cursor skill](https://github.com/PhillipChaffee/.cursor) for run-shape triage and dependency-aware dispatch. `swiftui-animation-match` catalogs [Shubham Kumar Singh's SwiftUI-Animations](https://github.com/Shubham0812/SwiftUI-Animations). `bootstrap-ios` routes to community packs listed in [bootstrap-ios/references/sources.md](bootstrap-ios/references/sources.md), including [Paul Hudson / Hacking with Swift](https://github.com/twostraws/swift-agent-skills), [Antoine van der Lee](https://github.com/AvdLee), [OpenAI plugins](https://github.com/openai/plugins), [Krzysztof Zablocki](https://merowing.info/posts/stop-getting-average-code-from-your-llm/), and [XcodeBuildMCP](https://github.com/getsentry/XcodeBuildMCP).
 
 ### Robert C. Martin — *Clean Code* and *Clean Architecture*
 
@@ -128,19 +130,19 @@ Sources recorded in [`scaffolding/SOURCE.md`](scaffolding/SOURCE.md). Full notic
 
 ### Original to this collection
 
-`lee-engineering`, `architect`, `arena`, `blast-radius`, `github-delivery`, `interrogate`, `scaffolding`, and `typescript-best-practices`. No earlier public skill matching these files was found.
+`architect`, `arena`, `blast-radius`, `github-delivery`, `interrogate`, `scaffolding`, and `typescript-best-practices` were written by Lee for korallis/skills-collection; `bee-mode` is this collection's adaptation of his `lee-engineering`. No earlier public skill matching these files was found.
 
 `technical-writing` is also original. Its rules cite [Diátaxis](https://diataxis.fr) (Daniele Procida), the [Google developer documentation style guide](https://developers.google.com/style), [ASD-STE100](https://asd-ste100.org), and John R. Kohl, *The Global English Style Guide*.
 
 ## Router
 
-### lee-engineering
+### bee-mode
 
-Original to this collection.
+Adapted from Lee's `lee-engineering` in [korallis/skills-collection](https://github.com/korallis/skills-collection).
 
 Default entry point for planning, design, implementation, refactoring, debugging, review, and documentation. It reads the repository's own rules first, prefers TypeScript for new code when no language is already chosen, and loads only the specialist skills that help the current task. Creating an app, module, package, workspace, or folder tree loads `scaffolding`. Adding a dependency, layer, or import that crosses a boundary loads `clean-architecture`. Writing or reviewing source loads `clean-code`.
 
-For non-trivial work it follows the local multi-model contract in `lee-engineering/references/model-routing.md`: coordinator, supervisor, specialist, worker, writer lease, route admission, receipts, and independent review. Cloud coding agents are out of scope. Skill activation never grants permission to push, open a pull request, deploy, or mutate unrelated external state.
+For non-trivial work it follows the multi-model contract in `bee-mode/references/model-routing.md`: the Paseo `claude` agent on Claude Fable 5 is the coordinator, Paseo (`paseo wait`, `paseo logs`, `paseo permit`) is the supervisor, Grok 4.6 workers are dispatched with `paseo run --provider grok/grok-4.6`, and `bee-grok-review` provides different-family review. Install and verification: `bee-mode/references/grok-harness.md`. Cloud coding agents are out of scope. Skill activation never grants permission to push, open a pull request, deploy, or mutate unrelated external state.
 
 ## Architecture and design
 
@@ -322,11 +324,11 @@ Original to this collection.
 
 Local multi-agent design or implementation competition. Use when several materially different solutions are plausible and selection quality matters. Creates isolated candidates, judges them against shared criteria, and lets the lead synthesize and verify the strongest result. No cloud agents.
 
-### waves-codex
+### waves
 
 From [Ray Fernando's `waves-codex`](https://github.com/RayFernando1337/rayfernando-skills/tree/main/plugins/waves-codex/skills/waves-codex). Run-shape triage and dependency-aware dispatch also credit [Phillip Chaffee's `deep-research` Cursor skill](https://github.com/PhillipChaffee/.cursor).
 
-WAVES: Workers, Aggregate, Verify, Extend. Wave-based orchestration for Codex. Decompose a large goal into independent slices, spawn a bounded parallel wave, collect evidence-backed handoffs, verify important claims, synthesize one deliverable, and start another wave only when warranted.
+WAVES: Workers, Aggregate, Verify, Extend. Wave-based orchestration for bee-mode: the Fable manager decomposes and Grok workers run under Paseo. Decompose a large goal into independent slices, spawn a bounded parallel wave, collect evidence-backed handoffs, verify important claims, synthesize one deliverable, and start another wave only when warranted.
 
 ### research
 
@@ -375,7 +377,7 @@ Grok Build TUI also ships product skills under `~/.grok/bundled/skills`. Those f
 | `review` | Reviewer subagent for local changes, a branch, or a GitHub pull request. |
 | `skill-design-principles` | Principles for writing and editing skills. |
 
-An older public collection lives at [korallis/skills](https://github.com/korallis/skills). That repository is not this working set.
+Upstream: [korallis/skills-collection](https://github.com/korallis/skills-collection). This repository does not track it; changes are cherry-picked by hand.
 
 ## License
 

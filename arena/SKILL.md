@@ -15,7 +15,7 @@ Use competing local candidates only when diversity is worth the additional work.
 
 ## Run candidates
 
-- Use harness-native local subagents or locally installed model CLIs. Never claim a named model was
+- Use harness-native local subagents or Grok workers launched through Paseo. Never claim a named model was
   consulted unless it actually ran.
 - Isolate implementation candidates in separate branches or worktrees. One writer owns each.
 - Keep candidates bounded; they should return artifacts and evidence, not lengthy process diaries.

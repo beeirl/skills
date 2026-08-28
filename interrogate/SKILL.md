@@ -26,7 +26,8 @@ Use this rubric:
 ## Consult independently
 
 Use harness-native local subagents. When installed and practical, run genuine read-only reviews with
-separate local model-family CLIs such as Codex and Grok. Never simulate or label a reviewer as a model
+a separate local model family: Grok launched through Paseo (`paseo run --provider grok/grok-4.6`) or
+`bee-grok-review` for a fixed artifact. Never simulate or label a reviewer as a model
 that did not actually run. Keep reviewers isolated until their first verdict, and do not let review
 agents edit, push, merge, deploy, or contact people.
 

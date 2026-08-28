@@ -1,0 +1,39 @@
+name: Bee harness
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/bee-harness.yml"
+      - "bee-mode/**"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/bee-harness.yml"
+      - "bee-mode/**"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Run unit tests
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 -m unittest discover -s bee-mode/tests -p 'test_*.py'
+      - name: Validate entry points
+        run: |
+          python3 bee-mode/scripts/install.py digest --json
+          sh -n bee-mode/scripts/bee-grok
+          sh -n bee-mode/scripts/bee-grok-review
