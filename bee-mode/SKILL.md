@@ -29,6 +29,13 @@ implementation, or review.
 
 ## Route the work
 
+Read-heavy delegated work never runs in the coordinator or in a coordinator sub-agent. Research,
+scouting, codebase exploration, doc or API fact-gathering, and reading legwork run as a Grok worker:
+`paseo run --provider grok/grok-4.6 --cwd <repo> --env GROK_MEMORY=0 --env GROK_SUBAGENTS=0 -d --json
+"<self-contained packet>"`, then `paseo wait <id>` and `paseo logs <id> --json`. When a skill says
+"sub-agent" or "background agent" for such work, that means this route. Implementation, review, and
+risk-gated dispatch follow `references/model-routing.md` unchanged.
+
 For every non-trivial software task, read and follow the normative
 [`references/model-routing.md`](references/model-routing.md) contract before dispatch. It defines the
 coordinator, supervisor, specialist-lead, worker, writer-lease, route-admission, lifecycle, receipt, and

@@ -3,7 +3,7 @@ name: research
 description: Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.
 ---
 
-Spin up a **background agent** to do the research, so you keep working while it reads.
+Dispatch a **Grok worker** through Paseo to do the research (bee-mode read-heavy route: `paseo run --provider grok/grok-4.6 --env GROK_MEMORY=0 --env GROK_SUBAGENTS=0 -d`, web search on), so you keep working while it reads. Do not use a coordinator sub-agent.
 
 Its job:
 
